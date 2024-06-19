@@ -19,7 +19,7 @@ export const useBalanceCustom = ({
 
   const fetchBalance = async () => {
     const contractBalance = new Contract(
-      ABIS.ErcSierraABI.abi,
+      ABIS.ercSierraABI.abi,
       token,
       new Provider({ nodeUrl: provider })
     );

@@ -1,26 +1,24 @@
 import {
   Button,
   HStack,
+  Icon,
   Menu,
   MenuButton,
   Spinner,
   Text,
-} from '@chakra-ui/react';
-import { useBalance, useDisconnect } from '@starknet-react/core';
-import React from 'react';
-import { FaUserCircle } from 'react-icons/fa';
-import { MdLogout } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+} from "@chakra-ui/react";
+import { useBalance, useDisconnect } from "@starknet-react/core";
+import React from "react";
+import LogoutIcon from "@/public/assets/icons/logout.svg";
+import UserIcon from "@/public/assets/icons/user.svg";
+import { useDispatch } from "react-redux";
 
-import { useAuth } from '../hooks/useAuth';
-
-import { removeUserFromStorage } from '@/redux/user/user-helper';
-import { setChainId, setUser, setUserLoading } from '@/redux/user/user-slice';
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { userAddress, disconnectWallet } = useAuth();
   const { isLoading, data } = useBalance({
-    address: user ? user : undefined,
+    address: userAddress ? userAddress : undefined,
     watch: true,
   });
   const { disconnect } = useDisconnect();
@@ -28,54 +26,35 @@ export default function Profile() {
   return (
     <Menu direction="ltr">
       <MenuButton
-        textColor={'black'}
+        textColor={"black"}
         as={Button}
-        bg={'#018576'}
-        rounded={'2xl'}
-        color={'white'}
-        variant={'hover'}
-        rightIcon={<MdLogout />}
+        bg={"#018576"}
+        rounded={"2xl"}
+        color={"white"}
+        variant={"hover"}
+        rightIcon={<LogoutIcon />}
         onClick={async () => {
-          await dispatch(setUserLoading(true));
-          removeUserFromStorage();
-          await dispatch(setUser(null));
-          await dispatch(setChainId(null));
           await disconnect();
-          dispatch(setUserLoading(false));
+          await disconnectWallet();
         }}
-        fontSize={'sm'}
+        fontSize={"sm"}
       >
         <HStack>
-          <FaUserCircle />
-          <Text color={'white'} fontWeight="bold">
+          <Icon as={UserIcon} w={5} h={5} />
+          <Text color={"white"} fontWeight="bold">
             {isLoading ? (
               <Text>
-                <Spinner mt={0.5} size={'xs'} />
+                <Spinner mt={0.5} size={"xs"} />
               </Text>
             ) : (
               <>
-                {(parseFloat(data?.value as any) / 1e18).toFixed(6) + ' '}
+                {(parseFloat(data?.value as any) / 1e18).toFixed(6) + " "}
                 {data?.symbol}
               </>
             )}
           </Text>
         </HStack>
       </MenuButton>
-
-      {/* <MenuList p={0} width="full">
-        <MenuItem
-          onClick={async () => {
-            await dispatch(setUserLoading(true));
-            removeUserFromStorage();
-            await dispatch(setUser(undefined));
-            await disconnect();
-            dispatch(setUserLoading(false));
-          }}
-          fontSize={'sm'}
-        >
-          <Text>Log out</Text>
-        </MenuItem>
-      </MenuList> */}
     </Menu>
   );
 }

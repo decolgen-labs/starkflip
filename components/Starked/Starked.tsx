@@ -5,17 +5,16 @@ import {
   useContractRead,
   useContractWrite,
   useNetwork,
-} from '@starknet-react/core';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+} from "@starknet-react/core";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import abi from '../../abi/starknet.json';
-import abiToken from '../../abi/tokenEth.json';
-import config from '../../config/config';
-import { getEvent } from '../Contract/contract';
-import Flip from '../Flip/Flip';
+import config from "../../config/config";
+import { getEvent } from "../Contract/contract";
+import Flip from "../Flip/Flip";
 
-import { setUserLoading } from '@/redux/user/user-slice';
+import { setUserLoading } from "@/redux/user/user-slice";
+import { ABIS } from "@/abis";
 export default function Starked() {
   const [staked, setStaked] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0.002);
@@ -32,18 +31,18 @@ export default function Starked() {
 
   const { chain } = useNetwork();
   const { contract } = useContract({
-    abi: abi,
+    abi: ABIS.starknetAbi,
     address: config.contractAddress,
   });
 
   const { contract: contractToken } = useContract({
-    abi: abiToken,
+    abi: ABIS.ethAbi,
     address: chain.nativeCurrency.address,
   });
 
   const callsApprove = useMemo(() => {
     if (!address || !contract) return [];
-    return contractToken?.populateTransaction['approve']!(
+    return contractToken?.populateTransaction["approve"]!(
       config.contractAddress,
       0.1 * 1e18
     );
@@ -51,7 +50,7 @@ export default function Starked() {
 
   const calls = useMemo(() => {
     if (!address || !contract) return [];
-    return contract.populateTransaction['create_game']!(
+    return contract.populateTransaction["create_game"]!(
       config.poolId,
       amount * 1e18,
       coin
@@ -59,11 +58,11 @@ export default function Starked() {
   }, [address, contract, amount, coin]);
 
   const { data: isApprove } = useContractRead({
-    functionName: 'allowance',
+    functionName: "allowance",
     args: [address as string, config.contractAddress],
-    abi: abiToken,
+    abi: ABIS.ethAbi,
     address:
-      '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
+      "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
     watch: true,
   });
 
@@ -95,7 +94,7 @@ export default function Starked() {
       dispatch(setUserLoading(true));
       while (!isFinish && attempts < maxAttempts) {
         try {
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          await new Promise((resolve) => setTimeout(resolve, 2000));
 
           const result = await getEvent(transactionHash);
 
@@ -106,19 +105,19 @@ export default function Starked() {
           isFinish = true;
         } catch (error) {
           attempts++;
-          console.error('Error in handleSettle:', error);
+          console.error("Error in handleSettle:", error);
         }
       }
 
       if (!isFinish) {
-        alert('Settle failed');
+        alert("Settle failed");
         return;
       }
 
       if (isWon !== undefined) {
         setStatusWon(isWon);
       } else {
-        console.error('No valid data found on the blockchain');
+        console.error("No valid data found on the blockchain");
       }
       dispatch(setUserLoading(false));
     }
@@ -132,7 +131,7 @@ export default function Starked() {
         await writeApprove();
       }
     } catch (error) {
-      console.error('Error in handleGame:', error);
+      console.error("Error in handleGame:", error);
     }
   };
 

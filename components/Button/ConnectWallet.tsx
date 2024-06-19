@@ -1,24 +1,22 @@
-import { Box, Button, useDisclosure } from '@chakra-ui/react';
-import { useConnect } from '@starknet-react/core';
-import { useDispatch } from 'react-redux';
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { useConnect } from "@starknet-react/core";
 
-import ModalConnectWallet from '../Modal/ModalConnectWallet';
+import ModalConnectWallet from "../Modal/ModalConnectWallet";
 
-import ConnectWalletButton from './ConnectWalletButton';
+import ConnectWalletButton from "./ConnectWalletButton";
 
-import wallets from '@/config/wallet';
-import { setChainId } from '@/redux/user/user-slice';
+import wallets from "@/config/wallet";
+import { useAuth } from "@/hooks/useAuth";
 
 const ConnectWallet = ({ onClick, icon, label }: any) => {
   const { connect, connectors, data } = useConnect();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const dispatch = useDispatch();
-  const connectWallet = async (connectorIndex: number) => {
+  const { connectWallet } = useAuth();
+  const handleConnectWallet = async (connectorIndex: number) => {
     await connect({ connector: connectors[connectorIndex] });
-
-    await dispatch(setChainId(connectorIndex));
+    await connectWallet(connectorIndex);
     onClose();
   };
 
@@ -37,11 +35,11 @@ const ConnectWallet = ({ onClick, icon, label }: any) => {
 
         <ModalConnectWallet isOpen={isOpen} onClose={onClose}>
           <Box px={2} pb={4}>
-            {wallets.map(wallet => (
+            {wallets.map((wallet) => (
               <ConnectWalletButton
                 key={`connect-${wallet.label}`}
                 onClick={async () => {
-                  await connectWallet(wallet.index);
+                  await handleConnectWallet(wallet.index);
                 }}
                 icon={wallet.icon}
                 label={wallet.label}

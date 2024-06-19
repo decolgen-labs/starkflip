@@ -5,16 +5,16 @@ import ConnectWallet from "../Button/ConnectWallet";
 import Profile from "../Profile/Profile";
 import Starked from "../Starked/Starked";
 
-import { useAuth } from "@/components/hooks/useAuth";
 import BgStart from "@/public/assets/art/bg-left.svg";
 import BgRight from "@/public/assets/art/bg-right.svg";
 import LogoIcon from "@/public/assets/logo.svg";
+import { useAuth } from "@/hooks/useAuth";
 const StartGame = () => {
   const { userAddress } = useAuth();
 
   return (
     <>
-      <Box position="relative" height="full" zIndex={10}>
+      <Box position="relative" height="100vh" zIndex={10}>
         <Icon
           as={BgStart}
           height="100%"

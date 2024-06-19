@@ -1,10 +1,10 @@
-import { Box, Flex } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Flex } from "@chakra-ui/react";
+import { useState } from "react";
 
-import styles from '../../styles/CoinFlip.module.css';
+import styles from "./CoinFlip.module.css";
 
-import FlipHead from './FlipHead';
-import FlipMain from './FlipMain';
+import FlipHead from "./FlipHead";
+import FlipMain from "./FlipMain";
 
 export default function Flip({
   coin,
@@ -21,7 +21,7 @@ export default function Flip({
 }: any) {
   const [result, setResult] = useState({ total: 0, heads: 0, tails: 0 });
 
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
 
   const [isHeads, setIsHeads] = useState(true);
   const [isFlipping, setIsFlipping] = useState(false);
@@ -33,7 +33,7 @@ export default function Flip({
     <Box>
       {/* <ConfettiExplosion duration={3000} particleCount={200} /> */}
 
-      <Flex flexDirection={'column'}>
+      <Flex flexDirection={"column"}>
         <FlipHead
           percentageHeads={percentageHeads}
           result={result}

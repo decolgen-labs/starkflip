@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Icon, Text } from '@chakra-ui/react';
-import { useAccount, useBalance } from '@starknet-react/core';
-import React, { useEffect, useRef, useState } from 'react';
+import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
+import { useAccount, useBalance } from "@starknet-react/core";
+import React, { useEffect, useRef, useState } from "react";
 
-import IconETH from '../../public/assets/icons/eth.svg';
-import { useAuth } from '../hooks/useAuth';
-import Confetti from '../Motion/Confetti';
+import IconETH from "../../public/assets/icons/eth.svg";
+
+import Confetti from "../Motion/Confetti";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function FlipMain({
   isHeads,
@@ -59,14 +60,14 @@ export default function FlipMain({
     address,
     watch: true,
   });
-  const flipCoin = (result: 'heads' | 'tails') => {
+  const flipCoin = (result: "heads" | "tails") => {
     const coin = coinRef.current as HTMLElement | null;
 
-    coin?.setAttribute('class', '');
+    coin?.setAttribute("class", "");
     setTimeout(() => {
-      coin?.setAttribute('class', `animate-${result}`);
+      coin?.setAttribute("class", `animate-${result}`);
       setTimeout(() => {
-        if (result === 'heads') {
+        if (result === "heads") {
           setHeadsCount(headsCount + 1);
         } else {
           setTailsCount(tailsCount + 1);
@@ -81,73 +82,73 @@ export default function FlipMain({
   useEffect(() => {
     if (statusWon !== undefined) {
       if (statusWon) {
-        flipCoin(coin === 0 ? 'heads' : 'tails');
+        flipCoin(coin === 0 ? "heads" : "tails");
       } else {
-        flipCoin(coin === 1 ? 'heads' : 'tails');
+        flipCoin(coin === 1 ? "heads" : "tails");
       }
     }
   }, [statusWon, coin]);
   return (
-    <Box textColor={'white'} bg={'#1d1d1b99'} my={6} rounded={'lg'}>
+    <Box textColor={"white"} bg={"#1d1d1b99"} my={6} rounded={"lg"}>
       <Box className="container">
         <Box ref={coinRef} id="coin" className="">
           <Box id="heads" className="heads"></Box>
           <Box id="tails" className="tails"></Box>
         </Box>
         <Flex
-          bg={'black'}
+          bg={"black"}
           mt={6}
           p={1}
           gap={1}
-          flexWrap={'wrap'}
+          flexWrap={"wrap"}
           mx={4}
-          justifyContent={'space-between'}
-          rounded={'2xl'}
+          justifyContent={"space-between"}
+          rounded={"2xl"}
         >
           {listItem.map((item: any, index: number) => (
             <Button
               onClick={() => {
                 setStaked(index), setAmount(item.value);
               }}
-              variant={'hover'}
-              cursor={'pointer'}
-              bg={index === staked ? '#00FFB3' : 'transparent'}
+              variant={"hover"}
+              cursor={"pointer"}
+              bg={index === staked ? "#00FFB3" : "transparent"}
               py={4}
               px={6}
-              rounded={'2xl'}
-              textColor={'white'}
-              borderColor={'gray.100'}
+              rounded={"2xl"}
+              textColor={"white"}
+              borderColor={"gray.100"}
               key={index}
             >
               <Text
-                display={'flex'}
-                textColor={'#018576'}
+                display={"flex"}
+                textColor={"#018576"}
                 gap={1}
-                alignItems={'center'}
+                alignItems={"center"}
               >
                 {item.value} <Icon as={IconETH} />
               </Text>
             </Button>
           ))}
         </Flex>
-        <Flex gap={4} mt={6} justifyContent={'center'}>
+        <Flex gap={4} mt={6} justifyContent={"center"}>
           <Button
             py={2}
             mt={4}
             px={16}
-            textColor={'black'}
-            border={'1px'}
-            borderColor={'#018576'}
-            bg={'#012E3F'}
-            _hover={{ borderColor: '#00FFB3', textColor: '#00FFB3' }}
-            variant={'hover'}
+            textColor={"black"}
+            border={"1px"}
+            borderColor={"#018576"}
+            bg={"#012E3F"}
+            _hover={{ borderColor: "#00FFB3", textColor: "#00FFB3" }}
+            variant={"hover"}
             isLoading={isLoading}
-            color={'#018576'}
-            rounded={'2xl'}
+            color={"#018576"}
+            rounded={"2xl"}
             onClick={statusWon === undefined ? handleGame : resetGame}
-            fontSize={'1.25rem'}
+            fontSize={"1.25rem"}
           >
-            {statusWon !== undefined ? 'Play again' : 'Flip it!'}
+            {statusWon !== undefined ? "Play again" : "Flip it!"}
           </Button>
         </Flex>
 
@@ -157,11 +158,11 @@ export default function FlipMain({
               <>
                 <Confetti />
                 <Text
-                  border={'1px'}
-                  borderColor={'green.400'}
-                  textColor={'green.400'}
+                  border={"1px"}
+                  borderColor={"green.400"}
+                  textColor={"green.400"}
                   px={12}
-                  rounded={'xl'}
+                  rounded={"xl"}
                   mt={4}
                   py={2}
                 >
@@ -170,13 +171,13 @@ export default function FlipMain({
               </>
             ) : (
               <Text
-                border={'1px'}
+                border={"1px"}
                 px={12}
-                rounded={'xl'}
+                rounded={"xl"}
                 mt={4}
                 py={2}
-                textColor={'secondary.200'}
-                borderColor={'secondary.200'}
+                textColor={"secondary.200"}
+                borderColor={"secondary.200"}
               >
                 You Lose
               </Text>

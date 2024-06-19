@@ -5,24 +5,28 @@ import {
   shortString,
   stark,
   typedData,
-} from 'starknet';
+} from "starknet";
 
-import abi from '../../abi/starknet.json';
-import config from '../../config/config';
+import config from "../../config/config";
+import { ABIS } from "@/abis";
 
 export const getEvent = async (transactionHash: string) => {
   const provider = new RpcProvider({
     nodeUrl:
-      'https://starknet-goerli.infura.io/v3/7d290a76648a4bac93e5f98aa0d463ce',
+      "https://starknet-goerli.infura.io/v3/7d290a76648a4bac93e5f98aa0d463ce",
   });
 
-  const contract = new Contract(abi, config.contractAddress, provider);
+  const contract = new Contract(
+    ABIS.starknetAbi,
+    config.contractAddress,
+    provider
+  );
 
   const txReceipt = await provider.getTransactionReceipt(transactionHash);
 
   const parsedEvent = contract.parseEvents(txReceipt);
 
-  const idGame = '0x' + parsedEvent[0].CreateGame.id.toString(16);
+  const idGame = "0x" + parsedEvent[0].CreateGame.id.toString(16);
 
   console.log(idGame);
   const ResultTransactionHash = await verifyMsg(
@@ -53,24 +57,24 @@ const verifyMsg = async (
     const accountAX = new Account(provider, accountAddress, privateKey);
     const types = {
       StarkNetDomain: [
-        { name: 'name', type: 'felt' },
-        { name: 'version', type: 'felt' },
-        { name: 'chainId', type: 'felt' },
+        { name: "name", type: "felt" },
+        { name: "version", type: "felt" },
+        { name: "chainId", type: "felt" },
       ],
       Settle: [
-        { name: 'game_id', type: 'felt' },
-        { name: 'guess', type: 'u8' },
-        { name: 'seed', type: 'u128' },
+        { name: "game_id", type: "felt" },
+        { name: "guess", type: "u8" },
+        { name: "seed", type: "u128" },
       ],
     };
 
     const typedDataValidate = {
       types,
-      primaryType: 'Settle',
+      primaryType: "Settle",
       domain: {
-        name: 'dappName',
-        version: '1',
-        chainId: shortString.encodeShortString('SN_GOERLI'),
+        name: "dappName",
+        version: "1",
+        chainId: shortString.encodeShortString("SN_GOERLI"),
       },
       message: {
         game_id: idGame,
@@ -85,7 +89,7 @@ const verifyMsg = async (
     const arr = stark.formatSignature(signature);
 
     contract.connect(accountAX);
-    const myCall = contract.populate('settle', [idGame, arr]);
+    const myCall = contract.populate("settle", [idGame, arr]);
 
     const res = await contract.settle(myCall.calldata);
 

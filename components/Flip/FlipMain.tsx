@@ -41,7 +41,6 @@ export default function FlipMain({
     },
   ];
 
-  console.log(coin);
   const [headsCount, setHeadsCount] = useState(0);
   const [tailsCount, setTailsCount] = useState(0);
   const [status, setStatus] = useState<boolean>(false);

@@ -28,7 +28,6 @@ export const getEvent = async (transactionHash: string) => {
 
   const idGame = "0x" + parsedEvent[0].CreateGame.id.toString(16);
 
-  console.log(idGame);
   const ResultTransactionHash = await verifyMsg(
     provider,
     parsedEvent,

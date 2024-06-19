@@ -1,13 +1,13 @@
 import { RPC_PROVIDER } from "@/utils/constants";
 import { sepolia } from "@starknet-react/chains";
 import {
-  InjectedConnector,
   StarknetConfig,
+  argent,
   jsonRpcProvider,
-  publicProvider,
+  useInjectedConnectors,
+  voyager,
 } from "@starknet-react/core";
 import React, { PropsWithChildren } from "react";
-import { ArgentMobileConnector } from "starknetkit/argentMobile";
 
 const ProviderStarknet = ({ children }: PropsWithChildren) => {
   function rpc() {
@@ -17,17 +17,22 @@ const ProviderStarknet = ({ children }: PropsWithChildren) => {
   }
 
   const provider = jsonRpcProvider({ rpc });
-  const connectors = [
-    new InjectedConnector({ options: { id: "argentX", name: "Argent X" } }),
-    new InjectedConnector({ options: { id: "braavos", name: "Braavos" } }),
-    new ArgentMobileConnector(),
-  ];
+  // const connectors = [
+  //   new InjectedConnector({ options: { id: "argentX", name: "Argent X" } }),
+  //   new InjectedConnector({ options: { id: "braavos", name: "Braavos" } }),
+  //   new ArgentMobileConnector(),
+  // ];
+  const { connectors } = useInjectedConnectors({
+    recommended: [argent()],
+    includeRecommended: "onlyIfNoConnectors",
+  });
   return (
     <>
       <StarknetConfig
         chains={[sepolia]}
-        provider={publicProvider()}
+        provider={provider}
         connectors={connectors}
+        explorer={voyager}
       >
         {children}
       </StarknetConfig>

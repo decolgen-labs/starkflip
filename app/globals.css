@@ -35,7 +35,7 @@ button {
 }
 
 .heads {
-  background-image: url("../public/assets/coin/head.svg");
+  background-image: url("/assets/coin/head.svg");
 }
 
 .animate-heads {
@@ -53,7 +53,7 @@ button {
 }
 
 .tails {
-  background-image: url("../public/assets/coin/tail.svg");
+  background-image: url("/assets/coin/tail.svg");
 
   transform: rotateY(-180deg);
 }

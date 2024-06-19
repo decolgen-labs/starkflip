@@ -66,7 +66,6 @@ export default function Starked() {
     watch: true,
   });
 
-  console.log(isApprove);
   const {
     writeAsync,
     data: dataWrite,

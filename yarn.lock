@@ -5161,7 +5161,7 @@ starknet-types@^0.7.1:
   resolved "https://registry.yarnpkg.com/starknet-types/-/starknet-types-0.7.2.tgz#2a1be2392e6e568484afabdc1e83411b5105713b"
   integrity sha512-r3JJ0rrK0g3FnVRGcFiLY+9YT5WZgxB4TKBfR44wYGevHtKEM6BM5B+Gn1eou1zV7xEAwz3GpmvLSQTUAzDhsw==
 
-starknet@^6.10.0:
+starknet@^6.6.0:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/starknet/-/starknet-6.10.0.tgz#ceaf31ec9c21f78bdc8203241d3ccb7b67dd3ac2"
   integrity sha512-Zlo39V37dytBcqHlWpyLkEH4lXGRMaH7ST4yDGSGxkgxlJ11xW7P7abpWnB87Qn9SdgEzUEDLyM3TeBVTsdtYA==

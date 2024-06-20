@@ -1,38 +1,41 @@
 import {
   Account,
   Contract,
-  RpcProvider,
+  Provider,
+  ResponseParser,
+  json,
+  num,
   shortString,
   stark,
-  typedData,
+  uint256,
 } from "starknet";
 
 import config from "../../config/config";
-import { ABIS } from "@/abis";
+import { convertPropertiesToNumber, convertToNumber } from "@/utils/parseData";
 
 export const getEvent = async (transactionHash: string) => {
-  const provider = new RpcProvider({
+  const provider = new Provider({
     nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
   });
 
-  const contract = new Contract(
-    ABIS.starknetAbi,
-    config.contractAddress,
-    provider
-  );
+  const { abi } = await provider.getClassAt(config.contractAddress);
+
+  const contract = new Contract(abi, config.contractAddress, provider);
   await provider.waitForTransaction(transactionHash);
 
   const txReceipt = await provider.getTransactionReceipt(transactionHash);
-  console.log(txReceipt);
 
   const parsedEvent = contract.parseEvents(txReceipt);
-  console.log(parsedEvent[0].CreateGame.id);
+  console.log("Paras", parsedEvent);
+  const dataParse = convertPropertiesToNumber(
+    parsedEvent[0]["starkflip::starkflip::StarkFlip::StarkFlip::CreateGame"]
+  );
 
-  const idGame = "0x" + parsedEvent[0].CreateGame.id.toString(16);
+  const idGame = num.toHex(dataParse.id as any);
 
   const ResultTransactionHash = await verifyMsg(
     provider,
-    parsedEvent,
+    dataParse,
     contract,
     idGame
   );
@@ -40,7 +43,12 @@ export const getEvent = async (transactionHash: string) => {
     ResultTransactionHash
   );
   const parsedResultEvent = contract.parseEvents(txResultReceipt);
-  const isWon = parsedResultEvent[0].SettleGame.is_won;
+  const dataResult = convertPropertiesToNumber(
+    parsedResultEvent[0][
+      "starkflip::starkflip::StarkFlip::StarkFlip::SettleGame"
+    ]
+  );
+  const isWon = dataResult.is_won;
 
   return { idGame, isWon };
 };
@@ -56,6 +64,9 @@ const verifyMsg = async (
     const privateKey = config.privateKey as any;
 
     const accountAX = new Account(provider, accountAddress, privateKey);
+    console.log("ID", idGame);
+    console.log(Number(parsedEvent.guess));
+    console.log(BigInt(parsedEvent.seed).toString());
     const types = {
       StarkNetDomain: [
         { name: "name", type: "felt" },
@@ -79,8 +90,8 @@ const verifyMsg = async (
       },
       message: {
         game_id: idGame,
-        guess: Number(parsedEvent[0].CreateGame.guess),
-        seed: parsedEvent[0].CreateGame.seed.toString(),
+        guess: Number(parsedEvent.guess),
+        seed: BigInt(parsedEvent.seed).toString(),
       },
     };
 

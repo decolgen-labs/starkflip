@@ -1,9 +1,8 @@
 import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
-import { useAccount, useBalance } from "@starknet-react/core";
+
 import React, { useEffect, useRef, useState } from "react";
 
-import IconETH from "../../public/assets/icons/eth.svg";
-
+import IconStarknet from "@/public/assets/icons/starknet.svg";
 import Confetti from "../Motion/Confetti";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -11,7 +10,6 @@ export default function FlipMain({
   isHeads,
   styles,
   isFlipping,
-
   setIsFlipping,
   handleGame,
   setStaked,
@@ -106,7 +104,7 @@ export default function FlipMain({
                 gap={1}
                 alignItems={"center"}
               >
-                {item.value} <Icon as={IconETH} />
+                {item.value} <Icon as={IconStarknet} />
               </Text>
             </Button>
           ))}

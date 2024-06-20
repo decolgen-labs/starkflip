@@ -17,11 +17,7 @@ const ProviderStarknet = ({ children }: PropsWithChildren) => {
   }
 
   const provider = jsonRpcProvider({ rpc });
-  // const connectors = [
-  //   new InjectedConnector({ options: { id: "argentX", name: "Argent X" } }),
-  //   new InjectedConnector({ options: { id: "braavos", name: "Braavos" } }),
-  //   new ArgentMobileConnector(),
-  // ];
+
   const { connectors } = useInjectedConnectors({
     recommended: [argent()],
     includeRecommended: "onlyIfNoConnectors",

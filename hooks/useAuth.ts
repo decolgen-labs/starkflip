@@ -1,5 +1,5 @@
 "use client";
-import { useAccount, useConnect, useDisconnect } from "@starknet-react/core";
+import { useConnect, useDisconnect } from "@starknet-react/core";
 import { useTypedSelector } from "./useTypedSelector";
 
 import { useDispatch } from "react-redux";
@@ -18,8 +18,20 @@ export const useAuth = () => {
   });
 
   const connectWallet = async (index: number) => {
-    await connect({ connector: connectors[index] });
-    dispatch(setConnector(index));
+    try {
+      dispatch(setUserLoading(true));
+      await connect({ connector: connectors[index] });
+      dispatch(setConnector(index));
+      dispatch(setUserLoading(false));
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Error while connecting wallet",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   const disconnectWallet = () => {
@@ -28,6 +40,6 @@ export const useAuth = () => {
     dispatch(logout());
     dispatch(setUserLoading(false));
   };
-
+  const handleFlipping = async () => {};
   return { ...user, disconnectWallet, connectWallet };
 };

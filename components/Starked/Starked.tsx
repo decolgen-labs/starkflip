@@ -9,7 +9,7 @@ import Flip from "../Flip/Flip";
 import { setUserLoading } from "@/redux/user/user-slice";
 
 import { CONTRACT_ADDRESS } from "@/utils/constants";
-import { CallData, RpcProvider, uint256 } from "starknet";
+import { CallData, uint256 } from "starknet";
 export default function Starked() {
   const [staked, setStaked] = useState<number>(0);
   const [amount, setAmount] = useState<number>(1);
@@ -29,14 +29,9 @@ export default function Starked() {
         let isFinish = false;
 
         dispatch(setUserLoading(true));
-        const provider = new RpcProvider({
-          nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
-        });
-
-        await provider.waitForTransaction(transactionHash);
 
         const result = await getEvent(transactionHash);
-        console.log("What Result", result);
+
         if (result && result.isWon !== undefined) {
           isWon = result.isWon;
         }
@@ -46,6 +41,7 @@ export default function Starked() {
         } else {
           console.error("No valid data found on the blockchain");
         }
+        isFinish = true;
         dispatch(setUserLoading(false));
       }
     } catch (error) {

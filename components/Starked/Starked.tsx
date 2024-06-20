@@ -1,12 +1,5 @@
-import {
-  useAccount,
-  useBalance,
-  useContract,
-  useContractRead,
-  useContractWrite,
-  useNetwork,
-} from "@starknet-react/core";
-import { useEffect, useMemo, useState } from "react";
+import { useAccount } from "@starknet-react/core";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import config from "../../config/config";
@@ -14,120 +7,75 @@ import { getEvent } from "../Contract/contract";
 import Flip from "../Flip/Flip";
 
 import { setUserLoading } from "@/redux/user/user-slice";
-import { ABIS } from "@/abis";
+
+import { CONTRACT_ADDRESS } from "@/utils/constants";
+import { CallData, RpcProvider, uint256 } from "starknet";
 export default function Starked() {
   const [staked, setStaked] = useState<number>(0);
-  const [amount, setAmount] = useState<number>(0.002);
+  const [amount, setAmount] = useState<number>(1);
   const [statusWon, setStatusWon] = useState<any>();
   const [statusFlip, setStatusFlip] = useState<boolean>(false);
 
-  const { address } = useAccount();
   const dispatch = useDispatch();
-  const { refetch } = useBalance({
-    address,
-    watch: true,
-  });
+
   const [coin, setCoin] = useState(0);
 
-  const { chain } = useNetwork();
-  const { contract } = useContract({
-    abi: ABIS.starknetAbi,
-    address: config.contractAddress,
-  });
-
-  const { contract: contractToken } = useContract({
-    abi: ABIS.ethAbi,
-    address: chain.nativeCurrency.address,
-  });
-
-  const callsApprove = useMemo(() => {
-    if (!address || !contract) return [];
-    return contractToken?.populateTransaction["approve"]!(
-      config.contractAddress,
-      0.1 * 1e18
-    );
-  }, [address, contract, contractToken?.populateTransaction]);
-
-  const calls = useMemo(() => {
-    if (!address || !contract) return [];
-    return contract.populateTransaction["create_game"]!(
-      config.poolId,
-      amount * 1e18,
-      coin
-    );
-  }, [address, contract, amount, coin]);
-
-  const { data: isApprove } = useContractRead({
-    functionName: "allowance",
-    args: [address as string, config.contractAddress],
-    abi: ABIS.ethAbi,
-    address:
-      "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-    watch: true,
-  });
-
-  const {
-    writeAsync,
-    data: dataWrite,
-    isPending,
-  } = useContractWrite({
-    calls,
-  });
-
-  const {
-    writeAsync: writeApprove,
-    data: dataApprove,
-    isPending: isPendingApprove,
-  } = useContractWrite({
-    calls: callsApprove,
-  });
-
-  useEffect(() => {}, [dataWrite]);
-
+  const { account } = useAccount();
   const handleSettle = async (transactionHash: string) => {
-    if (transactionHash) {
-      let isWon;
-      const maxAttempts = 10;
-      let isFinish = false;
-      let attempts = 0;
-      dispatch(setUserLoading(true));
-      while (!isFinish && attempts < maxAttempts) {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      if (transactionHash) {
+        let isWon;
 
-          const result = await getEvent(transactionHash);
+        let isFinish = false;
 
-          if (result && result.isWon !== undefined) {
-            isWon = result.isWon;
-          }
+        dispatch(setUserLoading(true));
+        const provider = new RpcProvider({
+          nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
+        });
 
-          isFinish = true;
-        } catch (error) {
-          attempts++;
-          console.error("Error in handleSettle:", error);
+        await provider.waitForTransaction(transactionHash);
+
+        const result = await getEvent(transactionHash);
+        console.log("What Result", result);
+        if (result && result.isWon !== undefined) {
+          isWon = result.isWon;
         }
-      }
 
-      if (!isFinish) {
-        alert("Settle failed");
-        return;
+        if (isWon !== undefined) {
+          setStatusWon(isWon);
+        } else {
+          console.error("No valid data found on the blockchain");
+        }
+        dispatch(setUserLoading(false));
       }
-
-      if (isWon !== undefined) {
-        setStatusWon(isWon);
-      } else {
-        console.error("No valid data found on the blockchain");
-      }
-      dispatch(setUserLoading(false));
+    } catch (error) {
+      console.log("Error Sta", error);
     }
   };
   const handleGame = async () => {
     try {
-      if (Number(isApprove) >= amount * 1e18) {
-        const createGame = await writeAsync();
-        await handleSettle(createGame?.transaction_hash);
-      } else {
-        await writeApprove();
+      if (account) {
+        const { transaction_hash } = await account.execute([
+          {
+            contractAddress: CONTRACT_ADDRESS.STRK,
+            entrypoint: "approve",
+            calldata: CallData.compile({
+              spender: config.contractAddress,
+              amount: uint256.bnToUint256(amount * 1e18),
+            }),
+          },
+
+          {
+            contractAddress: config.contractAddress,
+            entrypoint: "create_game",
+            calldata: CallData.compile({
+              pool_id: config.poolId,
+              staked: uint256.bnToUint256(1e18),
+              guess: 0,
+            }),
+          },
+        ]);
+        await handleSettle(transaction_hash);
       }
     } catch (error) {
       console.error("Error in handleGame:", error);
@@ -137,7 +85,7 @@ export default function Starked() {
   const resetGame = () => {
     setCoin(0);
     setStatusWon(undefined);
-    refetch();
+
     setStatusFlip(false);
   };
 
@@ -152,7 +100,6 @@ export default function Starked() {
         staked={staked}
         statusWon={statusWon}
         resetGame={resetGame}
-        refetch={refetch}
         statusFlip={statusFlip}
         setStatusFlip={setStatusFlip}
       />

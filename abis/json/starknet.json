@@ -2,7 +2,7 @@
   {
     "name": "StarkFlipImpl",
     "type": "impl",
-    "interface_name": "contracts::IStarkFlip"
+    "interface_name": "starkflip::interfaces::IStarkFlip::IStarkFlip"
   },
   {
     "name": "core::bool",
@@ -33,7 +33,7 @@
     ]
   },
   {
-    "name": "contracts::IStarkFlip",
+    "name": "starkflip::interfaces::IStarkFlip::IStarkFlip",
     "type": "interface",
     "items": [
       {
@@ -65,18 +65,6 @@
         "state_mutability": "external"
       },
       {
-        "name": "transfer_ownership",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "target",
-            "type": "core::starknet::contract_address::ContractAddress"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
         "name": "add_liquidity",
         "type": "function",
         "inputs": [
@@ -90,18 +78,6 @@
       },
       {
         "name": "withdraw_liquidity",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "amount",
-            "type": "core::integer::u256"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
-        "name": "withdraw_treasury",
         "type": "function",
         "inputs": [
           {
@@ -129,44 +105,8 @@
             "type": "core::integer::u256"
           },
           {
-            "name": "staked_amount",
-            "type": "core::integer::u256"
-          },
-          {
             "name": "fee_rate",
             "type": "core::integer::u128"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
-        "name": "topup_pool",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "pool_id",
-            "type": "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            "name": "staked_amount",
-            "type": "core::integer::u256"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
-        "name": "withdraw_liquidity_pool",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "pool_id",
-            "type": "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            "name": "amount",
-            "type": "core::integer::u256"
           }
         ],
         "outputs": [],
@@ -178,7 +118,7 @@
         "inputs": [
           {
             "name": "pool_id",
-            "type": "core::starknet::contract_address::ContractAddress"
+            "type": "core::felt252"
           },
           {
             "name": "staked",
@@ -198,7 +138,7 @@
         "inputs": [
           {
             "name": "game_id",
-            "type": "core::starknet::contract_address::ContractAddress"
+            "type": "core::felt252"
           },
           {
             "name": "signature",
@@ -214,31 +154,11 @@
         "inputs": [
           {
             "name": "game_id",
-            "type": "core::starknet::contract_address::ContractAddress"
+            "type": "core::felt252"
           }
         ],
         "outputs": [],
         "state_mutability": "external"
-      },
-      {
-        "name": "test_get_message_hash",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "game_id",
-            "type": "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            "name": "signature",
-            "type": "core::array::Array::<core::felt252>"
-          }
-        ],
-        "outputs": [
-          {
-            "type": "core::felt252"
-          }
-        ],
-        "state_mutability": "view"
       }
     ]
   },
@@ -268,69 +188,6 @@
     "state_mutability": "external"
   },
   {
-    "name": "is_valid_signature",
-    "type": "function",
-    "inputs": [
-      {
-        "name": "signer",
-        "type": "core::starknet::contract_address::ContractAddress"
-      },
-      {
-        "name": "hash",
-        "type": "core::felt252"
-      },
-      {
-        "name": "signature",
-        "type": "core::array::Array::<core::felt252>"
-      }
-    ],
-    "outputs": [
-      {
-        "type": "core::felt252"
-      }
-    ],
-    "state_mutability": "view"
-  },
-  {
-    "name": "get_message_hash",
-    "type": "function",
-    "inputs": [
-      {
-        "name": "game_id",
-        "type": "core::felt252"
-      },
-      {
-        "name": "guess",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "seed",
-        "type": "core::integer::u128"
-      },
-      {
-        "name": "signer",
-        "type": "core::starknet::contract_address::ContractAddress"
-      }
-    ],
-    "outputs": [
-      {
-        "type": "core::felt252"
-      }
-    ],
-    "state_mutability": "view"
-  },
-  {
-    "name": "get_admin",
-    "type": "function",
-    "inputs": [],
-    "outputs": [
-      {
-        "type": "core::starknet::contract_address::ContractAddress"
-      }
-    ],
-    "state_mutability": "view"
-  },
-  {
     "name": "get_contract_name",
     "type": "function",
     "inputs": [],
@@ -343,28 +200,6 @@
   },
   {
     "name": "get_liquidity",
-    "type": "function",
-    "inputs": [],
-    "outputs": [
-      {
-        "type": "core::integer::u256"
-      }
-    ],
-    "state_mutability": "view"
-  },
-  {
-    "name": "get_treasury",
-    "type": "function",
-    "inputs": [],
-    "outputs": [
-      {
-        "type": "core::integer::u256"
-      }
-    ],
-    "state_mutability": "view"
-  },
-  {
-    "name": "get_shared_liquidity",
     "type": "function",
     "inputs": [],
     "outputs": [
@@ -391,12 +226,12 @@
     "state_mutability": "view"
   },
   {
-    "name": "contracts::StarkFlip::Pool",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::Pool",
     "type": "struct",
     "members": [
       {
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "name": "dealer",
@@ -411,10 +246,6 @@
         "type": "core::integer::u256"
       },
       {
-        "name": "staked_amount",
-        "type": "core::integer::u256"
-      },
-      {
         "name": "fee_rate",
         "type": "core::integer::u128"
       }
@@ -426,27 +257,27 @@
     "inputs": [
       {
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       }
     ],
     "outputs": [
       {
-        "type": "contracts::StarkFlip::Pool"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::Pool"
       }
     ],
     "state_mutability": "view"
   },
   {
-    "name": "contracts::StarkFlip::Game",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::Game",
     "type": "struct",
     "members": [
       {
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "name": "pool",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "name": "player",
@@ -476,26 +307,71 @@
     "inputs": [
       {
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       }
     ],
     "outputs": [
       {
-        "type": "contracts::StarkFlip::Game"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::Game"
       }
     ],
     "state_mutability": "view"
+  },
+  {
+    "name": "OwnableImpl",
+    "type": "impl",
+    "interface_name": "openzeppelin::access::ownable::interface::IOwnable"
+  },
+  {
+    "name": "openzeppelin::access::ownable::interface::IOwnable",
+    "type": "interface",
+    "items": [
+      {
+        "name": "owner",
+        "type": "function",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "name": "transfer_ownership",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "new_owner",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "renounce_ownership",
+        "type": "function",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
   },
   {
     "name": "constructor",
     "type": "constructor",
     "inputs": [
       {
-        "name": "_owner",
+        "name": "owner",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "_eth_address",
+        "name": "strk_address",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "treasury_receiver",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
@@ -506,24 +382,7 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::TransferOwnership",
-    "type": "event",
-    "members": [
-      {
-        "kind": "key",
-        "name": "prev_admin",
-        "type": "core::starknet::contract_address::ContractAddress"
-      },
-      {
-        "kind": "key",
-        "name": "new_admin",
-        "type": "core::starknet::contract_address::ContractAddress"
-      }
-    ]
-  },
-  {
-    "kind": "struct",
-    "name": "contracts::StarkFlip::SetPartnership",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::SetPartnership",
     "type": "event",
     "members": [
       {
@@ -540,7 +399,7 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::SetContractName",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::SetContractName",
     "type": "event",
     "members": [
       {
@@ -557,7 +416,7 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::AddLiquidity",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::AddLiquidity",
     "type": "event",
     "members": [
       {
@@ -574,7 +433,7 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::WithdrawLiquidity",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::WithdrawLiquidity",
     "type": "event",
     "members": [
       {
@@ -591,13 +450,13 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::CreatePool",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::CreatePool",
     "type": "event",
     "members": [
       {
         "kind": "key",
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "kind": "data",
@@ -616,11 +475,6 @@
       },
       {
         "kind": "data",
-        "name": "staked_amount",
-        "type": "core::integer::u256"
-      },
-      {
-        "kind": "data",
         "name": "fee_rate",
         "type": "core::integer::u128"
       }
@@ -628,18 +482,18 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::CreateGame",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::CreateGame",
     "type": "event",
     "members": [
       {
         "kind": "key",
         "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "kind": "data",
         "name": "pool",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "kind": "data",
@@ -670,30 +524,13 @@
   },
   {
     "kind": "struct",
-    "name": "contracts::StarkFlip::TopupPool",
-    "type": "event",
-    "members": [
-      {
-        "kind": "key",
-        "name": "id",
-        "type": "core::starknet::contract_address::ContractAddress"
-      },
-      {
-        "kind": "data",
-        "name": "staked_amount",
-        "type": "core::integer::u256"
-      }
-    ]
-  },
-  {
-    "kind": "struct",
-    "name": "contracts::StarkFlip::SettleGame",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::SettleGame",
     "type": "event",
     "members": [
       {
         "kind": "key",
         "name": "game_id",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "type": "core::felt252"
       },
       {
         "kind": "data",
@@ -713,54 +550,100 @@
     ]
   },
   {
+    "kind": "struct",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+    "type": "event",
+    "members": [
+      {
+        "kind": "key",
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "kind": "key",
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+    "type": "event",
+    "members": [
+      {
+        "kind": "key",
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "kind": "key",
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
     "kind": "enum",
-    "name": "contracts::StarkFlip::Event",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::Event",
     "type": "event",
     "variants": [
       {
         "kind": "nested",
-        "name": "TransferOwnership",
-        "type": "contracts::StarkFlip::TransferOwnership"
+        "name": "OwnershipTransferred",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferred"
       },
       {
         "kind": "nested",
+        "name": "OwnershipTransferStarted",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferStarted"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "starkflip::starkflip::StarkFlip::StarkFlip::Event",
+    "type": "event",
+    "variants": [
+      {
+        "kind": "nested",
         "name": "SetPartnership",
-        "type": "contracts::StarkFlip::SetPartnership"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::SetPartnership"
       },
       {
         "kind": "nested",
         "name": "SetContractName",
-        "type": "contracts::StarkFlip::SetContractName"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::SetContractName"
       },
       {
         "kind": "nested",
         "name": "AddLiquidity",
-        "type": "contracts::StarkFlip::AddLiquidity"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::AddLiquidity"
       },
       {
         "kind": "nested",
         "name": "WithdrawLiquidity",
-        "type": "contracts::StarkFlip::WithdrawLiquidity"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::WithdrawLiquidity"
       },
       {
         "kind": "nested",
         "name": "CreatePool",
-        "type": "contracts::StarkFlip::CreatePool"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::CreatePool"
       },
       {
         "kind": "nested",
         "name": "CreateGame",
-        "type": "contracts::StarkFlip::CreateGame"
-      },
-      {
-        "kind": "nested",
-        "name": "TopupPool",
-        "type": "contracts::StarkFlip::TopupPool"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::CreateGame"
       },
       {
         "kind": "nested",
         "name": "SettleGame",
-        "type": "contracts::StarkFlip::SettleGame"
+        "type": "starkflip::starkflip::StarkFlip::StarkFlip::SettleGame"
+      },
+      {
+        "kind": "flat",
+        "name": "OwnableEvent",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::Event"
       }
     ]
   }

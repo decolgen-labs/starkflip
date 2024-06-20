@@ -24,7 +24,9 @@ export const colors = {
 const styles = {
   // eslint-disable-next-line no-unused-vars
   global: (props: StyleFunctionProps) => ({
-    body: {},
+    body: {
+      background: "url('/assets/art/frame.svg')",
+    },
   }),
 };
 const Button: ComponentStyleConfig = {
@@ -50,9 +52,10 @@ const Button: ComponentStyleConfig = {
   },
 };
 const config: ThemeConfig = {
-  initialColorMode: "light",
+  initialColorMode: "dark",
   useSystemColorMode: false,
 };
+
 const theme = extendTheme({
   colors,
   styles,

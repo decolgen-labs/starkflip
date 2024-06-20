@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/react';
-import React from 'react';
+import { Box } from "@chakra-ui/react";
+import React from "react";
 
-import Profile from '../Profile/Profile';
-import Starked from '../Starked/Starked';
+import Profile from "../Profile/Profile";
+import Starked from "../Starked/Starked";
 
 export default function HomePage() {
   return (

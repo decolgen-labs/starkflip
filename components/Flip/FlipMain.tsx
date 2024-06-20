@@ -25,40 +25,22 @@ export default function FlipMain({
 }: any) {
   const listItem = [
     {
-      value: 0.002,
+      value: 1,
     },
     {
-      value: 0.005,
+      value: 2,
     },
     {
-      value: 0.01,
-    },
-    {
-      value: 0.02,
-    },
-    {
-      value: 0.5,
+      value: 5,
     },
   ];
 
   const [headsCount, setHeadsCount] = useState(0);
   const [tailsCount, setTailsCount] = useState(0);
-  const [status, setStatus] = useState<boolean>(false);
+
   const { isLoading } = useAuth();
   const coinRef = useRef(null);
 
-  const { account, address } = useAccount();
-
-  const {
-    isLoading: isLoadingBalance,
-    isError,
-    error,
-    data,
-    refetch,
-  } = useBalance({
-    address,
-    watch: true,
-  });
   const flipCoin = (result: "heads" | "tails") => {
     const coin = coinRef.current as HTMLElement | null;
 
@@ -73,7 +55,6 @@ export default function FlipMain({
         }
 
         setStatusFlip(true);
-        refetch();
       }, 3000);
     }, 1000);
   };

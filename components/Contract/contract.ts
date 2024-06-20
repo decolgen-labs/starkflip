@@ -12,8 +12,7 @@ import { ABIS } from "@/abis";
 
 export const getEvent = async (transactionHash: string) => {
   const provider = new RpcProvider({
-    nodeUrl:
-      "https://starknet-goerli.infura.io/v3/7d290a76648a4bac93e5f98aa0d463ce",
+    nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
   });
 
   const contract = new Contract(
@@ -21,10 +20,13 @@ export const getEvent = async (transactionHash: string) => {
     config.contractAddress,
     provider
   );
+  await provider.waitForTransaction(transactionHash);
 
   const txReceipt = await provider.getTransactionReceipt(transactionHash);
+  console.log(txReceipt);
 
   const parsedEvent = contract.parseEvents(txReceipt);
+  console.log(parsedEvent[0].CreateGame.id);
 
   const idGame = "0x" + parsedEvent[0].CreateGame.id.toString(16);
 
@@ -71,9 +73,9 @@ const verifyMsg = async (
       types,
       primaryType: "Settle",
       domain: {
-        name: "dappName",
+        name: "StarkFlip",
         version: "1",
-        chainId: shortString.encodeShortString("SN_GOERLI"),
+        chainId: shortString.encodeShortString("SN_SEPOLIA"),
       },
       message: {
         game_id: idGame,
@@ -81,8 +83,6 @@ const verifyMsg = async (
         seed: parsedEvent[0].CreateGame.seed.toString(),
       },
     };
-
-    const hashMsg = typedData.getMessageHash(typedDataValidate, accountAddress);
 
     const signature = await accountAX.signMessage(typedDataValidate);
     const arr = stark.formatSignature(signature);

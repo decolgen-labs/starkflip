@@ -10,7 +10,8 @@ import { setUserLoading } from "@/redux/user/user-slice";
 
 import { CONTRACT_ADDRESS } from "@/utils/constants";
 import { CallData, uint256 } from "starknet";
-export default function Starked() {
+
+export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
   const [amount, setAmount] = useState<number>(1);
   const [statusWon, setStatusWon] = useState<any>();
@@ -21,12 +22,11 @@ export default function Starked() {
   const [coin, setCoin] = useState(0);
 
   const { account } = useAccount();
+
   const handleSettle = async (transactionHash: string) => {
     try {
       if (transactionHash) {
         let isWon;
-
-        let isFinish = false;
 
         dispatch(setUserLoading(true));
 
@@ -41,7 +41,7 @@ export default function Starked() {
         } else {
           console.error("No valid data found on the blockchain");
         }
-        isFinish = true;
+        await fetchBalance();
         dispatch(setUserLoading(false));
       }
     } catch (error) {

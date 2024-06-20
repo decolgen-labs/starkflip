@@ -18,6 +18,7 @@ export default function Flip({
   refetch,
   statusFlip,
   setStatusFlip,
+  balance,
 }: any) {
   const [result, setResult] = useState({ total: 0, heads: 0, tails: 0 });
 
@@ -31,8 +32,6 @@ export default function Flip({
 
   return (
     <Box>
-      {/* <ConfettiExplosion duration={3000} particleCount={200} /> */}
-
       <Flex flexDirection={"column"}>
         <FlipHead
           percentageHeads={percentageHeads}

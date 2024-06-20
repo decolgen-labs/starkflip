@@ -9,9 +9,12 @@ import BgStart from "@/public/assets/art/bg-left.svg";
 import BgRight from "@/public/assets/art/bg-right.svg";
 import LogoIcon from "@/public/assets/logo.svg";
 import { useAuth } from "@/hooks/useAuth";
+import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 const StartGame = () => {
   const { userAddress } = useAuth();
-
+  const { fetchBalance, balance, isLoading } = useBalanceCustom({
+    address: userAddress,
+  });
   return (
     <>
       <Box position="relative" height="100vh" zIndex={10}>
@@ -51,10 +54,10 @@ const StartGame = () => {
                 top={{ lg: 20, base: 10 }}
                 right={{ lg: 32, base: 6 }}
               >
-                <Profile />
+                <Profile balance={balance} isLoadingBalance={isLoading} />
               </Box>
 
-              <Starked />
+              <Starked fetchBalance={fetchBalance} />
             </>
           ) : (
             <>

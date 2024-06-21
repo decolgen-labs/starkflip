@@ -1,21 +1,13 @@
-import {
-  Account,
-  Contract,
-  Provider,
-  ResponseParser,
-  json,
-  num,
-  shortString,
-  stark,
-  uint256,
-} from "starknet";
+import { Account, Contract, Provider, num, shortString, stark } from "starknet";
 
 import config from "../../config/config";
-import { convertPropertiesToNumber, convertToNumber } from "@/utils/parseData";
+import { convertPropertiesToNumber } from "@/utils/parseData";
+import { RPC_PROVIDER } from "@/utils/constants";
+import { useToast } from "@chakra-ui/react";
 
 export const getEvent = async (transactionHash: string) => {
   const provider = new Provider({
-    nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
+    nodeUrl: RPC_PROVIDER.MAINET,
   });
 
   const { abi } = await provider.getClassAt(config.contractAddress);
@@ -59,12 +51,15 @@ const verifyMsg = async (
   contract: any,
   idGame: string
 ) => {
+  const toast = useToast({
+    position: "top",
+    duration: 10000,
+  });
   try {
     const accountAddress = config.accountAddress as any;
     const privateKey = config.privateKey as any;
 
     const accountAX = new Account(provider, accountAddress, privateKey);
-    console.log("ID", idGame);
     console.log(Number(parsedEvent.guess));
     console.log(BigInt(parsedEvent.seed).toString());
     const types = {
@@ -106,6 +101,13 @@ const verifyMsg = async (
     await provider.waitForTransaction(res.transaction_hash);
     return res.transaction_hash;
   } catch (error) {
-    console.log(error);
+    toast({
+      title: "Report To Close Pool The Game in Twitter: @starkarcade",
+      description:
+        "An error occurred while playing the game, you try to create many game in a block of starknet.Please feedback to close the pool , money will be refunded to your account. X:(@starkarcade)",
+      status: "info",
+      isClosable: true,
+      duration: null,
+    });
   }
 };

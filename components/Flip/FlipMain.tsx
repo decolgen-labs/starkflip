@@ -7,10 +7,6 @@ import Confetti from "../Motion/Confetti";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function FlipMain({
-  isHeads,
-  styles,
-  isFlipping,
-  setIsFlipping,
   handleGame,
   setStaked,
   setAmount,
@@ -35,8 +31,8 @@ export default function FlipMain({
     },
   ];
 
-  const [headsCount, setHeadsCount] = useState(0);
-  const [tailsCount, setTailsCount] = useState(0);
+  // const [headsCount, setHeadsCount] = useState(0);
+  // const [tailsCount, setTailsCount] = useState(0);
 
   const { isLoading } = useAuth();
   const coinRef = useRef(null);
@@ -48,12 +44,6 @@ export default function FlipMain({
     setTimeout(() => {
       coin?.setAttribute("class", `animate-${result}`);
       setTimeout(() => {
-        if (result === "heads") {
-          setHeadsCount(headsCount + 1);
-        } else {
-          setTailsCount(tailsCount + 1);
-        }
-
         setStatusFlip(true);
       }, 3000);
     }, 1000);

@@ -189,12 +189,12 @@ export default function Starked({ fetchBalance }: any) {
     } catch (error) {
       console.log("Error Settle", error);
       toast({
-        title: "Report To Close Pool The Game in Twitter: @starkarcade",
+        title: "Confirm To Close Pool The Game.",
         description:
-          "An error occurred while playing the game, you try to create many game in a block of starknet.Please feedback to close the pool , money will be refunded to your account. X:(@starkarcade)",
+          "An error occurred while playing the game, you are  creating many game with someone in the same time in a block of starknet",
         status: "info",
         isClosable: true,
-        duration: null,
+        duration: 5000,
       });
       setIsCancel(() => true);
       dispatch(setUserLoading(false));
@@ -210,7 +210,6 @@ export default function Starked({ fetchBalance }: any) {
   };
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      console.log("Catch Handle Reload");
       const message =
         "Are you sure you want to leave? Your changes may relate to error of game.";
       event.preventDefault();
@@ -240,7 +239,7 @@ export default function Starked({ fetchBalance }: any) {
           },
         ]);
         console.log("Account Cancel Game", transaction_hash);
-        setCurrentIDGame(undefined);
+        resetGame();
         dispatch(setUserLoading(false));
       }
     } catch (error) {

@@ -28,6 +28,10 @@ export default function Starked({ fetchBalance }: any) {
   const [amount, setAmount] = useState<number>(1);
   const [statusWon, setStatusWon] = useState<any>();
   const [statusFlip, setStatusFlip] = useState<boolean>(false);
+  const [isCancel, setIsCancel] = useState<boolean>(false);
+  const [currentIDGame, setCurrentIDGame] = useState<string | undefined>(
+    undefined
+  );
   const { isLoading } = useAuth();
   const dispatch = useDispatch();
 
@@ -111,7 +115,7 @@ export default function Starked({ fetchBalance }: any) {
     );
 
     const idGame = num.toHex(dataParse.id as any);
-
+    setCurrentIDGame(() => idGame);
     const ResultTransactionHash = await verifyMsg(
       provider,
       dataParse,
@@ -142,8 +146,8 @@ export default function Starked({ fetchBalance }: any) {
       const privateKey = config.privateKey as any;
 
       const accountAX = new Account(provider, accountAddress, privateKey);
-      console.log(Number(parsedEvent.guess));
-      console.log(BigInt(parsedEvent.seed).toString());
+      // console.log(Number(parsedEvent.guess));
+      // console.log(BigInt(parsedEvent.seed).toString());
       const types = {
         StarkNetDomain: [
           { name: "name", type: "felt" },
@@ -192,6 +196,7 @@ export default function Starked({ fetchBalance }: any) {
         isClosable: true,
         duration: null,
       });
+      setIsCancel(() => true);
       dispatch(setUserLoading(false));
     }
   };
@@ -199,16 +204,18 @@ export default function Starked({ fetchBalance }: any) {
     setCoin(0);
     setStatusWon(undefined);
     fetchBalance();
+    setIsCancel(false);
     setStatusFlip(false);
+    setCurrentIDGame(undefined);
   };
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (isLoading) {
-        const message =
-          "Are you sure you want to leave? Your changes may relate to error of game.";
-        event.returnValue = message; // For most browsers
-        return message; // For older browsers
-      }
+      console.log("Catch Handle Reload");
+      const message =
+        "Are you sure you want to leave? Your changes may relate to error of game.";
+      event.preventDefault();
+      event.returnValue = message;
+      return message;
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -218,7 +225,28 @@ export default function Starked({ fetchBalance }: any) {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+  const handleCancel = async () => {
+    try {
+      if (account && currentIDGame) {
+        dispatch(setUserLoading(true));
 
+        const { transaction_hash } = await account.execute([
+          {
+            contractAddress: config.contractAddress,
+            entrypoint: "cancel_game",
+            calldata: CallData.compile({
+              game_id: currentIDGame,
+            }),
+          },
+        ]);
+        console.log("Account Cancel Game", transaction_hash);
+        setCurrentIDGame(undefined);
+        dispatch(setUserLoading(false));
+      }
+    } catch (error) {
+      console.error("Error in CancelGame:", error);
+    }
+  };
   return (
     <>
       <Flip
@@ -232,6 +260,8 @@ export default function Starked({ fetchBalance }: any) {
         resetGame={resetGame}
         statusFlip={statusFlip}
         setStatusFlip={setStatusFlip}
+        isCancel={isCancel}
+        handleCancelGame={handleCancel}
       />
     </>
   );

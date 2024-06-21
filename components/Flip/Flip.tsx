@@ -19,6 +19,8 @@ export default function Flip({
   statusFlip,
   setStatusFlip,
   balance,
+  isCancel,
+  handleCancelGame,
 }: any) {
   const [result, setResult] = useState({ total: 0, heads: 0, tails: 0 });
 
@@ -59,6 +61,8 @@ export default function Flip({
           refetch={refetch}
           statusFlip={statusFlip}
           setStatusFlip={setStatusFlip}
+          isCancel={isCancel}
+          handleCancelGame={handleCancelGame}
         />
       </Flex>
     </Box>

@@ -46,16 +46,6 @@ export default function FlipHead({
             rounded={"8px"}
             textAlign={"center"}
           >
-            {/* <Text
-              textAlign={'center'}
-              my={0}
-              whiteSpace={'pre'}
-              fontSize={'2rem'}
-              mb={2}
-            >
-              {percentageHeads.toFixed(0)}%
-            </Text> */}
-
             <Text
               my={0}
               whiteSpace={"pre"}

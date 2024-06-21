@@ -20,16 +20,18 @@ export default function FlipMain({
   resetGame,
   statusFlip,
   setStatusFlip,
+  isCancel,
+  handleCancelGame,
 }: any) {
   const listItem = [
     {
       value: 1,
     },
     {
-      value: 5,
+      value: 2,
     },
     {
-      value: 10,
+      value: 5,
     },
   ];
 
@@ -111,27 +113,48 @@ export default function FlipMain({
           ))}
         </Flex>
         <Flex gap={4} mt={6} justifyContent={"center"}>
-          <Button
-            py={2}
-            mt={4}
-            px={16}
-            textColor={"black"}
-            border={"1px"}
-            borderColor={"#018576"}
-            bg={"#012E3F"}
-            _hover={{ borderColor: "#00FFB3", textColor: "#00FFB3" }}
-            variant={"hover"}
-            isLoading={isLoading}
-            color={"#018576"}
-            rounded={"2xl"}
-            onClick={statusWon === undefined ? handleGame : resetGame}
-            fontSize={"1.25rem"}
-          >
-            {statusWon !== undefined ? "Play again" : "Flip it!"}
-          </Button>
+          {isCancel ? (
+            <Button
+              py={2}
+              mt={4}
+              px={16}
+              textColor={"black"}
+              border={"1px"}
+              borderColor={"#018576"}
+              bg={"#012E3F"}
+              _hover={{ borderColor: "#00FFB3", textColor: "#00FFB3" }}
+              variant={"hover"}
+              isLoading={isLoading}
+              color={"#018576"}
+              rounded={"2xl"}
+              onClick={() => handleCancelGame()}
+              fontSize={"1.25rem"}
+            >
+              Cancel Game
+            </Button>
+          ) : (
+            <Button
+              py={2}
+              mt={4}
+              px={16}
+              textColor={"black"}
+              border={"1px"}
+              borderColor={"#018576"}
+              bg={"#012E3F"}
+              _hover={{ borderColor: "#00FFB3", textColor: "#00FFB3" }}
+              variant={"hover"}
+              isLoading={isLoading}
+              color={"#018576"}
+              rounded={"2xl"}
+              onClick={statusWon === undefined ? handleGame : resetGame}
+              fontSize={"1.25rem"}
+            >
+              {statusWon !== undefined ? "Play again" : "Flip it!"}
+            </Button>
+          )}
         </Flex>
 
-        {statusWon !== undefined && !isLoading && statusFlip && (
+        {statusWon !== undefined && !isLoading && statusFlip && !isCancel && (
           <>
             {statusWon ? (
               <>

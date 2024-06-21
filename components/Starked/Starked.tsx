@@ -10,7 +10,6 @@ import { setUserLoading } from "@/redux/user/user-slice";
 
 import { CONTRACT_ADDRESS } from "@/utils/constants";
 import { CallData, uint256 } from "starknet";
-import { useToast } from "@chakra-ui/react";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
@@ -46,7 +45,7 @@ export default function Starked({ fetchBalance }: any) {
         dispatch(setUserLoading(false));
       }
     } catch (error) {
-      console.log("Error Sta", error);
+      console.log("Error Da", error);
     }
   };
   const handleGame = async () => {

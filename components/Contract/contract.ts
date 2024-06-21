@@ -81,7 +81,7 @@ const verifyMsg = async (
       domain: {
         name: "StarkFlip",
         version: "1",
-        chainId: shortString.encodeShortString("SN_SEPOLIA"),
+        chainId: shortString.encodeShortString("SN_MAIN"),
       },
       message: {
         game_id: idGame,
@@ -101,6 +101,7 @@ const verifyMsg = async (
     await provider.waitForTransaction(res.transaction_hash);
     return res.transaction_hash;
   } catch (error) {
+    console.log("Error Settle", error);
     toast({
       title: "Report To Close Pool The Game in Twitter: @starkarcade",
       description:

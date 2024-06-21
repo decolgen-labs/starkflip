@@ -8,6 +8,7 @@ import Starked from "../Starked/Starked";
 import BgStart from "@/public/assets/art/bg-left.svg";
 import BgRight from "@/public/assets/art/bg-right.svg";
 import LogoIcon from "@/public/assets/logo.svg";
+
 import { useAuth } from "@/hooks/useAuth";
 import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 const StartGame = () => {

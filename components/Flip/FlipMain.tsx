@@ -26,10 +26,10 @@ export default function FlipMain({
       value: 1,
     },
     {
-      value: 2,
+      value: 5,
     },
     {
-      value: 5,
+      value: 10,
     },
   ];
 
@@ -86,7 +86,8 @@ export default function FlipMain({
           {listItem.map((item: any, index: number) => (
             <Button
               onClick={() => {
-                setStaked(index), setAmount(item.value);
+                setStaked(index);
+                setAmount(item.value);
               }}
               variant={"hover"}
               cursor={"pointer"}

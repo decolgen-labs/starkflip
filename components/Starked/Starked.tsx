@@ -80,7 +80,7 @@ export default function Starked({ fetchBalance }: any) {
             entrypoint: "create_game",
             calldata: CallData.compile({
               pool_id: config.poolId,
-              staked: uint256.bnToUint256(1e18),
+              staked: uint256.bnToUint256(amount * 1e18),
               guess: 0,
             }),
           },

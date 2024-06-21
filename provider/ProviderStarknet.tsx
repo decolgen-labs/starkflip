@@ -1,5 +1,5 @@
 import { RPC_PROVIDER } from "@/utils/constants";
-import { sepolia } from "@starknet-react/chains";
+import { mainnet } from "@starknet-react/chains";
 import {
   StarknetConfig,
   argent,
@@ -12,7 +12,7 @@ import React, { PropsWithChildren } from "react";
 const ProviderStarknet = ({ children }: PropsWithChildren) => {
   function rpc() {
     return {
-      nodeUrl: RPC_PROVIDER.TESTNET,
+      nodeUrl: RPC_PROVIDER.MAINET,
     };
   }
 
@@ -25,7 +25,7 @@ const ProviderStarknet = ({ children }: PropsWithChildren) => {
   return (
     <>
       <StarknetConfig
-        chains={[sepolia]}
+        chains={[mainnet]}
         provider={provider}
         connectors={connectors}
         explorer={voyager}

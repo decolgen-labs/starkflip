@@ -12,7 +12,7 @@ interface IProps {
 export const useBalanceCustom = ({
   address,
   token = CONTRACT_ADDRESS.STRK,
-  provider = RPC_PROVIDER.TESTNET,
+  provider = RPC_PROVIDER.MAINET,
 }: IProps) => {
   const [balance, setBalance] = useState<string>("0");
   const [isLoading, setIsLoading] = useState<boolean>(false);

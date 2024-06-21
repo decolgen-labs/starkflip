@@ -10,6 +10,7 @@ import { setUserLoading } from "@/redux/user/user-slice";
 
 import { CONTRACT_ADDRESS } from "@/utils/constants";
 import { CallData, uint256 } from "starknet";
+import { useToast } from "@chakra-ui/react";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
@@ -22,7 +23,10 @@ export default function Starked({ fetchBalance }: any) {
   const [coin, setCoin] = useState(0);
 
   const { account } = useAccount();
-
+  const toast = useToast({
+    position: "top",
+    duration: 10000,
+  });
   const handleSettle = async (transactionHash: string) => {
     try {
       if (transactionHash) {
@@ -75,13 +79,21 @@ export default function Starked({ fetchBalance }: any) {
       }
     } catch (error) {
       console.error("Error in handleGame:", error);
+      toast({
+        title: "Report To Close Pool The Game in Twitter: @starkarcade",
+        description:
+          "An error occurred while playing the game, you try to create many game in a block of starknet.Please feedback to close the pool , money will be refunded to your account. X:(@starkarcade)",
+        status: "info",
+        isClosable: true,
+        duration: null,
+      });
     }
   };
 
   const resetGame = () => {
     setCoin(0);
     setStatusWon(undefined);
-
+    fetchBalance();
     setStatusFlip(false);
   };
 

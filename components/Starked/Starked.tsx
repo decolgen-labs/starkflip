@@ -1,5 +1,5 @@
 import { useAccount } from "@starknet-react/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import config from "../../config/config";
@@ -21,13 +21,14 @@ import {
 } from "starknet";
 import { useToast } from "@chakra-ui/react";
 import { convertPropertiesToNumber } from "@/utils/parseData";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
   const [amount, setAmount] = useState<number>(1);
   const [statusWon, setStatusWon] = useState<any>();
   const [statusFlip, setStatusFlip] = useState<boolean>(false);
-
+  const { isLoading } = useAuth();
   const dispatch = useDispatch();
 
   const [coin, setCoin] = useState(0);
@@ -191,6 +192,7 @@ export default function Starked({ fetchBalance }: any) {
         isClosable: true,
         duration: null,
       });
+      dispatch(setUserLoading(false));
     }
   };
   const resetGame = () => {
@@ -199,6 +201,23 @@ export default function Starked({ fetchBalance }: any) {
     fetchBalance();
     setStatusFlip(false);
   };
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isLoading) {
+        const message =
+          "Are you sure you want to leave? Your changes may relate to error of game.";
+        event.returnValue = message; // For most browsers
+        return message; // For older browsers
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>

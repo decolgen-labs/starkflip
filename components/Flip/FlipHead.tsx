@@ -14,11 +14,12 @@ export default function FlipHead({
   statusFlip,
   statusWon,
 }: any) {
-  const borderColorStt = !statusFlip
-    ? "#00FFB3"
-    : statusFlip && statusWon
-    ? "#00FFB3"
-    : "secondary.200";
+  const borderColorStt =
+    statusFlip != null
+      ? "#00FFB3"
+      : statusFlip && statusWon
+      ? "#00FFB3"
+      : "secondary.200";
   return (
     <Box
       border={"1px"}
@@ -57,7 +58,7 @@ export default function FlipHead({
             </Text>
             <Icon as={HeadIcon} h={10} w={10} />
             <Radio
-              isDisabled={statusFlip}
+              isDisabled={statusFlip != null ? statusFlip : undefined}
               mt={2}
               colorScheme="yellow"
               value="1"
@@ -111,7 +112,7 @@ export default function FlipHead({
             </Text>
             <Icon as={TailIcon} h={10} w={10} />
             <Radio
-              isDisabled={statusFlip}
+              isDisabled={statusFlip != null ? statusFlip : undefined}
               mt={2}
               colorScheme="yellow"
               value="2"

@@ -40,6 +40,6 @@ export const useAuth = () => {
     dispatch(logout());
     dispatch(setUserLoading(false));
   };
-  const handleFlipping = async () => {};
+
   return { ...user, disconnectWallet, connectWallet };
 };

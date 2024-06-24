@@ -18,16 +18,13 @@ export default function Flip({
   refetch,
   statusFlip,
   setStatusFlip,
-  balance,
-  isCancel,
-  handleCancelGame,
+  isFlipping,
 }: any) {
   const [result, setResult] = useState({ total: 0, heads: 0, tails: 0 });
 
   const [status, setStatus] = useState("");
 
   const [isHeads, setIsHeads] = useState(true);
-  const [isFlipping, setIsFlipping] = useState(false);
 
   const percentageHeads = (result.heads / result.total) * 100 || 0;
   const percentageTails = (result.tails / result.total) * 100 || 0;
@@ -48,8 +45,6 @@ export default function Flip({
         <FlipMain
           isHeads={isHeads}
           styles={styles}
-          isFlipping={isFlipping}
-          setIsFlipping={setIsFlipping}
           status={status}
           handleGame={handleGame}
           setStaked={setStaked}
@@ -59,10 +54,9 @@ export default function Flip({
           statusWon={statusWon}
           resetGame={resetGame}
           refetch={refetch}
+          isFlipping={isFlipping}
           statusFlip={statusFlip}
           setStatusFlip={setStatusFlip}
-          isCancel={isCancel}
-          handleCancelGame={handleCancelGame}
         />
       </Flex>
     </Box>

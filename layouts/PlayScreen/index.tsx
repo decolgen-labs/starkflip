@@ -41,13 +41,32 @@ const PlayScreen = () => {
       if (
         userAddress != null &&
         statusWallet === "disconnected" &&
-        prevConnector != null
+        prevConnector != null &&
+        prevConnector != 1 &&
+        !account
       ) {
+        console.log("Conenct Argentx");
+        await connect({ connector: connectors[prevConnector] });
+      }
+    };
+    handleReConenct();
+  }, [addressWallet, statusWallet, prevConnector]);
+  useEffect(() => {
+    const handleReConenct = async () => {
+      if (
+        userAddress != null &&
+        statusWallet === "disconnected" &&
+        prevConnector != null &&
+        prevConnector == 1 &&
+        !account
+      ) {
+        console.log("Conenct Bravoos");
         await connect({ connector: connectors[prevConnector] });
       }
     };
     handleReConenct();
   });
+  console.log("Currnet Accout", account);
 
   return <StartGame />;
 };

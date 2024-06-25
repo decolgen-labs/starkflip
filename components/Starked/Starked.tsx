@@ -141,7 +141,7 @@ export default function Starked({ fetchBalance }: any) {
           description: " waiting for on-chain confirmation ...",
           status: "loading",
           duration: null,
-          isClosable: false,
+          isClosable: true,
         })}
     </>
   );

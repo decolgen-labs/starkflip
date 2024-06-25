@@ -68,6 +68,7 @@ export default function Starked({ fetchBalance }: any) {
           duration: null,
         });
         await handleSettle(transaction_hash);
+        fetchBalance();
         startNewGame();
         if (socketAPI) {
           socketAPI.on("gameResult", (data: any) => {

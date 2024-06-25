@@ -62,9 +62,24 @@ export default function Starked({ fetchBalance }: any) {
             }),
           },
         ]);
-
+        const registerGame = toast({
+          id: "creating-on-chain-game",
+          title: "Creating On-Chain Game",
+          description: " waiting for on-chain confirmation ...",
+          status: "loading",
+          duration: null,
+        });
         await handleSettle(transaction_hash);
         startNewGame();
+        if (socketAPI) {
+          socketAPI.on("gameResult", (data: any) => {
+            if (data.isWon != null) {
+              setIsFlipping(() => false);
+              setStatusWon(() => data.isWon);
+              toast.close(registerGame);
+            }
+          });
+        }
       }
     } catch (error) {
       console.error("Error in handleGame:", error);
@@ -90,6 +105,9 @@ export default function Starked({ fetchBalance }: any) {
     setStatusFlip(false);
   };
   useEffect(() => {
+    resetGame();
+  }, []);
+  useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       const message =
         "Are you sure you want to leave? Your changes may relate to error of game.";
@@ -105,19 +123,7 @@ export default function Starked({ fetchBalance }: any) {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
-  useEffect(() => {
-    if (!socketAPI) {
-      connectSocket();
-    }
-    if (socketAPI) {
-      socketAPI.on("gameResult", (data: any) => {
-        if (data.isWon != null) {
-          setIsFlipping(() => false);
-          setStatusWon(() => data.isWon);
-        }
-      });
-    }
-  }, [socketAPI]);
+
   const toast = useToast();
 
   return (
@@ -135,14 +141,6 @@ export default function Starked({ fetchBalance }: any) {
         statusFlip={statusFlip}
         setStatusFlip={setStatusFlip}
       />
-      {isFlipping &&
-        toast({
-          title: "Creating On-Chain Game",
-          description: " waiting for on-chain confirmation ...",
-          status: "loading",
-          duration: null,
-          isClosable: true,
-        })}
     </>
   );
 }

@@ -18,6 +18,9 @@ export const disconnectSocket = () => {
 };
 
 export const startNewGame = () => {
+  if (!socketAPI) {
+    connectSocket();
+  }
   socketAPI.emit("startNewGame");
 };
 

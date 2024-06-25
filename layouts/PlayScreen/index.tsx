@@ -43,11 +43,13 @@ const PlayScreen = () => {
         statusWallet === "disconnected" &&
         prevConnector != null
       ) {
+        console.log("IT nOT REconnect ???", prevConnector);
         await connect({ connector: connectors[prevConnector] });
       }
     };
     handleReConenct();
   }, [userAddress, prevConnector]);
+  console.log("CUrrent VAlue", account);
   return <StartGame />;
 };
 

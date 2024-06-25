@@ -140,7 +140,7 @@ export default function Starked({ fetchBalance }: any) {
           title: "Creating On-Chain Game",
           description: " waiting for on-chain confirmation ...",
           status: "loading",
-          duration: undefined,
+          duration: null,
           isClosable: false,
         })}
     </>

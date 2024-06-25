@@ -32,8 +32,6 @@ export default function Starked({ fetchBalance }: any) {
         setIsFlipping(() => true);
 
         await getEvent(transactionHash);
-
-        await fetchBalance();
       }
     } catch (error) {
       console.log("Error Da", error);
@@ -76,6 +74,7 @@ export default function Starked({ fetchBalance }: any) {
             if (data.isWon != null) {
               setIsFlipping(() => false);
               setStatusWon(() => data.isWon);
+              fetchBalance();
               toast.close(registerGame);
             }
           });

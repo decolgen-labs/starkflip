@@ -1,18 +1,16 @@
-import { useAccount } from "@starknet-react/core";
+import { useAccount, useConnect } from "@starknet-react/core";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import config from "../../config/config";
 
 import Flip from "../Flip/Flip";
-
-import { setUserLoading } from "@/redux/user/user-slice";
 
 import { CONTRACT_ADDRESS, RPC_PROVIDER } from "@/utils/constants";
 import { CallData, uint256, Provider } from "starknet";
 
 import { connectSocket, socketAPI, startNewGame } from "@/config/socketConfig";
 import { useToast } from "@chakra-ui/react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
@@ -24,8 +22,9 @@ export default function Starked({ fetchBalance }: any) {
 
   const [coin, setCoin] = useState(0);
 
+  const { userAddress, prevConnector } = useAuth();
+  const { connectors, connect } = useConnect();
   const { account } = useAccount();
-
   const handleSettle = async (transactionHash: string) => {
     try {
       if (transactionHash) {

@@ -87,8 +87,9 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             </Text>
           </MenuItem>
 
-          <MenuItem isDisabled>History</MenuItem>
-          <MenuItem isDisabled>LeaderBoard</MenuItem>
+          <MenuItem fontWeight="bold" isDisabled>
+            LeaderBoard
+          </MenuItem>
 
           <MenuDivider />
 

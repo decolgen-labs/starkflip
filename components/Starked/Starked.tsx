@@ -11,9 +11,8 @@ import { setUserLoading } from "@/redux/user/user-slice";
 import { CONTRACT_ADDRESS, RPC_PROVIDER } from "@/utils/constants";
 import { CallData, uint256, Provider } from "starknet";
 
-import { useAuth } from "@/hooks/useAuth";
 import { connectSocket, socketAPI, startNewGame } from "@/config/socketConfig";
-import { useGameStatus } from "@/hooks/useGameStatus";
+import { useToast } from "@chakra-ui/react";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
@@ -119,6 +118,7 @@ export default function Starked({ fetchBalance }: any) {
       });
     }
   }, [socketAPI]);
+  const toast = useToast();
 
   return (
     <>
@@ -135,6 +135,14 @@ export default function Starked({ fetchBalance }: any) {
         statusFlip={statusFlip}
         setStatusFlip={setStatusFlip}
       />
+      {isFlipping &&
+        toast({
+          title: "Creating On-Chain Game",
+          description: " waiting for on-chain confirmation ...",
+          status: "loading",
+          duration: undefined,
+          isClosable: false,
+        })}
     </>
   );
 }

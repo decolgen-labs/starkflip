@@ -68,10 +68,10 @@ export default function Starked({ fetchBalance }: any) {
         if (socketAPI) {
           socketAPI.on("gameResult", (data: any) => {
             if (data.isWon != null) {
+              setIsFlipping(() => false);
               setStatusWon(() => data.isWon);
               toast.close(registerGame);
               fetchBalance();
-              setIsFlipping(() => false);
             }
           });
         }

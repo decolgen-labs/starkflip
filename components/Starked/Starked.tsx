@@ -69,9 +69,9 @@ export default function Starked({ fetchBalance }: any) {
           socketAPI.on("gameResult", (data: any) => {
             if (data.isWon != null) {
               setStatusWon(() => data.isWon);
-              fetchBalance();
               toast.close(registerGame);
-              resetGame();
+              fetchBalance();
+              setIsFlipping(() => false);
             }
           });
         }
@@ -93,11 +93,12 @@ export default function Starked({ fetchBalance }: any) {
   };
 
   const resetGame = () => {
-    startNewGame();
     setCoin(0);
     setStatusWon(null);
     fetchBalance();
+    setIsFlipping(() => false);
     setStatusFlip(false);
+    startNewGame();
   };
   useEffect(() => {
     resetGame();

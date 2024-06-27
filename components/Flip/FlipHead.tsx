@@ -15,11 +15,7 @@ export default function FlipHead({
   statusWon,
 }: any) {
   const borderColorStt =
-    statusFlip != null
-      ? "#00FFB3"
-      : statusFlip && statusWon
-      ? "#00FFB3"
-      : "secondary.200";
+    statusWon == null ? "#00FFB3" : statusWon ? "#00FFB3" : "secondary.200";
   return (
     <Box
       border={"1px"}

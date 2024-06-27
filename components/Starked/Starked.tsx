@@ -1,4 +1,4 @@
-import { useAccount, useConnect } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 import { useEffect, useState } from "react";
 
 import config from "../../config/config";
@@ -8,9 +8,8 @@ import Flip from "../Flip/Flip";
 import { CONTRACT_ADDRESS, RPC_PROVIDER } from "@/utils/constants";
 import { CallData, uint256, Provider } from "starknet";
 
-import { connectSocket, socketAPI, startNewGame } from "@/config/socketConfig";
+import { socketAPI, startNewGame } from "@/config/socketConfig";
 import { useToast } from "@chakra-ui/react";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function Starked({ fetchBalance }: any) {
   const [staked, setStaked] = useState<number>(0);
@@ -22,14 +21,10 @@ export default function Starked({ fetchBalance }: any) {
 
   const [coin, setCoin] = useState(0);
 
-  const { userAddress, prevConnector } = useAuth();
-  const { connectors, connect } = useConnect();
   const { account } = useAccount();
   const handleSettle = async (transactionHash: string) => {
     try {
       if (transactionHash) {
-        setIsFlipping(() => true);
-
         await getEvent(transactionHash);
       }
     } catch (error) {
@@ -39,6 +34,7 @@ export default function Starked({ fetchBalance }: any) {
   const handleGame = async () => {
     try {
       if (account) {
+        setIsFlipping(() => true);
         const { transaction_hash } = await account.execute([
           {
             contractAddress: CONTRACT_ADDRESS.STRK,
@@ -48,7 +44,6 @@ export default function Starked({ fetchBalance }: any) {
               amount: uint256.bnToUint256(amount * 1e18),
             }),
           },
-
           {
             contractAddress: config().FLIP_CONTRACT_ADDRESS,
             entrypoint: "create_game",
@@ -69,19 +64,20 @@ export default function Starked({ fetchBalance }: any) {
         await handleSettle(transaction_hash);
         fetchBalance();
         startNewGame();
+
         if (socketAPI) {
           socketAPI.on("gameResult", (data: any) => {
             if (data.isWon != null) {
-              setIsFlipping(() => false);
               setStatusWon(() => data.isWon);
               fetchBalance();
               toast.close(registerGame);
+              resetGame();
             }
           });
         }
       }
     } catch (error) {
-      console.error("Error in handleGame:", error);
+      setIsFlipping(() => false);
     }
   };
   const getEvent = async (transactionHash: string) => {

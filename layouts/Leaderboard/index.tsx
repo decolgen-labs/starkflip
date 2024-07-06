@@ -8,7 +8,7 @@ import Trophy2 from "@/public/assets/icons/trophy2.svg";
 import Trophy3 from "@/public/assets/icons/trophy3.svg";
 import Trophy4 from "@/public/assets/icons/trophy4.svg";
 import CopyClipBoard from "@/components/CopyClipBoard/CopyClipBoard";
-import Profile from "@/components/Profile/Profile";
+import IconStrk from "@/public/assets/icons/starknet.svg";
 import { useAuth } from "@/hooks/useAuth";
 import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 import Header from "@/components/Header";
@@ -31,7 +31,10 @@ const LeaderboardPage = () => {
     "Rank",
     "Address",
     "(Win/Lose)",
-    "Win Amount",
+    <HStack gap={1}>
+      <Text>Win Amount</Text>
+      <Icon as={IconStrk} />
+    </HStack>,
     "Total Flipped",
   ];
   const { userAddress } = useAuth();

@@ -66,7 +66,6 @@ const PlayScreen = () => {
     };
     handleReConenct();
   });
-  console.log("Currnet Accout", account);
 
   return <StartGame />;
 };

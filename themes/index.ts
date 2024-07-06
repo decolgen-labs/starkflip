@@ -62,29 +62,19 @@ export const Menu: ComponentStyleConfig = {
         // this will style the MenuList component
         py: "4",
         borderRadius: "xl",
-        border: "none",
-        bg: "#018576",
+        border: "2px solid",
+        borderColor: "#0BDD7B",
+        bg: "#0BDD7B33",
       },
       item: {
-        bg: "inherit",
+        bg: "none",
         color: "gray.200",
         pl: 5,
         display: "flex",
         gap: 4,
         _hover: {
-          bg: "primary.game.200",
+          bg: "#0BDD7B",
         },
-      },
-      command: {
-        opacity: "0.8",
-        fontFamily: "mono",
-        fontSize: "sm",
-        letterSpacing: "tighter",
-        pl: "4",
-      },
-      divider: {
-        // this will style the MenuDivider component
-        my: "4",
       },
     },
   },

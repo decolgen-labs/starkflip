@@ -22,6 +22,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ABIS } from "@/abis";
 import { CONTRACT_ADDRESS } from "@/utils/constants";
 import { ellipseMiddle } from "@/utils/formatAddress";
+import Link from "next/link";
 
 export default function Profile({ balance, isLoadingBalance }: any) {
   const { userAddress, disconnectWallet } = useAuth();
@@ -34,17 +35,23 @@ export default function Profile({ balance, isLoadingBalance }: any) {
   });
   return (
     <>
-      <Menu variant="profile" matchWidth isOpen={true} onClose={() => {}}>
+      <Menu variant="profile" matchWidth>
         <MenuButton>
           <HStack
             color="white"
-            bg="#018576"
+            bg="#0BDD7B33"
+            border="2px solid"
+            borderColor="#0BDD7B"
             padding={4}
             fontWeight="800"
             borderRadius="8px"
-            display={{ xl: "flex", md: "none" }}
           >
-            <HStack width="fit-content" borderRight="2px solid" pr={2}>
+            <HStack
+              width="fit-content"
+              borderRight="2px solid"
+              pr={2}
+              borderRightColor="#0BDD7B"
+            >
               <Text>Your Point:</Text>
               <Box>
                 {!isLoadingPoint ? (
@@ -74,22 +81,16 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             </HStack>
           </HStack>
         </MenuButton>
-        <MenuList
-          display={{
-            lg: "inherit",
-            base: "none",
-          }}
-        >
+        <MenuList bg="#0BDD7B33">
           <MenuItem onClick={(e) => e.preventDefault()}>
             <Icon as={UserIcon} h={6} w={6} />
             <Text fontWeight="bold">
               {ellipseMiddle(userAddress || "", 8, 8)}
             </Text>
           </MenuItem>
-
-          <MenuItem fontWeight="bold" isDisabled>
-            LeaderBoard
-          </MenuItem>
+          <Link href="/leaderboard">
+            <MenuItem fontWeight="bold">LeaderBoard</MenuItem>
+          </Link>
 
           <MenuDivider />
 

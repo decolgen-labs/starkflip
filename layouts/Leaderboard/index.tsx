@@ -12,22 +12,18 @@ import IconStrk from "@/public/assets/icons/starknet.svg";
 import { useAuth } from "@/hooks/useAuth";
 import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 import Header from "@/components/Header";
+import { useQuery } from "@tanstack/react-query";
 const LeaderboardPage = () => {
-  const [dataTop, setDataTop] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+  const { data: dataTop, isLoading: isLoadingTop } = useQuery({
+    queryKey: ["leaderboard"],
+    queryFn: async () => {
       const data: any = await axiosHandlerNoBearer.get(
         "/starkflip/leaderboard"
       );
-
-      setDataTop(data.data);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-  const ListHedaer = [
+      return data.data;
+    },
+  });
+  const ListHeader = [
     "Rank",
     "Address",
     "(Win/Lose)",
@@ -69,7 +65,7 @@ const LeaderboardPage = () => {
           rowGap={2}
           overflow="auto"
         >
-          {ListHedaer.map((item, index) => (
+          {ListHeader.map((item, index) => (
             <Text
               fontWeight="bold"
               fontSize="xl"
@@ -81,9 +77,9 @@ const LeaderboardPage = () => {
           ))}
           {
             // @ts-ignore
-            !loading && dataTop ? (
+            !isLoadingTop && dataTop ? (
               <>
-                {dataTop.map((item: any, index: number) => {
+                {(dataTop as any[]).map((item: any, index: number) => {
                   return (
                     <>
                       <HStack>
@@ -143,7 +139,7 @@ const LeaderboardPage = () => {
                 ))}
               </>
             )
-          }{" "}
+          }
         </Grid>
       </Box>
     </React.Fragment>

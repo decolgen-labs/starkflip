@@ -1,3 +1,4 @@
+import { convertHex } from "./../utils/convertHex";
 import {
   extendTheme,
   ComponentStyleConfig,
@@ -55,7 +56,7 @@ const config: ThemeConfig = {
   initialColorMode: "dark",
   useSystemColorMode: false,
 };
-export const Menu: ComponentStyleConfig = {
+const Menu: ComponentStyleConfig = {
   variants: {
     profile: {
       list: {
@@ -70,12 +71,43 @@ export const Menu: ComponentStyleConfig = {
         bg: "none",
         color: "gray.200",
         pl: 5,
+        fontWeight: "bold",
         display: "flex",
         gap: 4,
         _hover: {
-          bg: "#0BDD7B",
+          bg: convertHex("#0BDD7B", 0.5),
         },
       },
+    },
+  },
+};
+
+const Tabs: ComponentStyleConfig = {
+  variants: {
+    primary: {
+      root: {
+        bg: "rgba(1, 133, 118, 0.2)",
+        borderRadius: "24px",
+        border: "1px solid rgba(1, 133, 118, 1)",
+      },
+      tab: {
+        py: 1,
+        px: 4,
+        borderRadius: "24px",
+        _selected: {
+          background: "rgba(255, 255, 255, 0.2)",
+          border: "1px solid rgba(255, 255, 255, 0.6)",
+        },
+      },
+      tablist: {
+        color: "white",
+        background: "rgba(1, 133, 118, 0.5)",
+        width: "fit-content",
+        p: 1,
+        borderRadius: "24px",
+      },
+      tabpanels: {},
+      tabpanel: {},
     },
   },
 };
@@ -86,6 +118,7 @@ const theme = extendTheme({
   components: {
     Button,
     Menu,
+    Tabs,
   },
 });
 

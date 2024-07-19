@@ -2,7 +2,7 @@
 import { Box, Icon } from "@chakra-ui/react";
 
 import ConnectWallet from "../Button/ConnectWallet";
-import Profile from "../Profile/Profile";
+
 import Starked from "../Starked/Starked";
 
 import LogoIcon from "@/public/assets/logo.svg";
@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 import React from "react";
 import Header from "../Header";
+import HomeTab from "../Home/HomeTab";
 const StartGame = () => {
   const { userAddress } = useAuth();
   const { fetchBalance, balance, isLoading } = useBalanceCustom({
@@ -21,7 +22,9 @@ const StartGame = () => {
       {userAddress ? (
         <>
           <Header balance={balance} isLoading={isLoading} />
-
+          <Box position="absolute" top="30%" left={"10%"}>
+            <HomeTab />
+          </Box>
           <Starked fetchBalance={fetchBalance} />
         </>
       ) : (

@@ -7,6 +7,7 @@ import { persistor, store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import ProviderScript from "./ProviderScript";
 import DefaultLayout from "@/layouts";
+import ProviderQueryClient from "./ProviderQueryClient";
 
 const ProviderApp = ({ children }: PropsWithChildren) => {
   return (
@@ -14,7 +15,9 @@ const ProviderApp = ({ children }: PropsWithChildren) => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ProviderStarknet>
-            <DefaultLayout>{children}</DefaultLayout>
+            <ProviderQueryClient>
+              <DefaultLayout>{children}</DefaultLayout>
+            </ProviderQueryClient>
           </ProviderStarknet>
         </PersistGate>
       </Provider>

@@ -1,4 +1,4 @@
-import { HStack, Icon, VStack } from "@chakra-ui/react";
+import { HStack, Icon } from "@chakra-ui/react";
 import React from "react";
 
 import LogoIcon from "@/public/assets/logo.svg";

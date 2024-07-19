@@ -1,7 +1,5 @@
 import {
-  Avatar,
   Box,
-  Button,
   HStack,
   Icon,
   Menu,
@@ -88,6 +86,9 @@ export default function Profile({ balance, isLoadingBalance }: any) {
               {ellipseMiddle(userAddress || "", 8, 8)}
             </Text>
           </MenuItem>
+          {/* <Link href="/my-history">
+            <MenuItem fontWeight="bold">MyHistory</MenuItem>
+          </Link> */}
           <Link href="/leaderboard">
             <MenuItem fontWeight="bold">LeaderBoard</MenuItem>
           </Link>

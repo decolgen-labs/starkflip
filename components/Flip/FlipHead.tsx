@@ -56,7 +56,7 @@ export default function FlipHead({
             <Radio
               isDisabled={statusFlip != null ? statusFlip : undefined}
               mt={2}
-              colorScheme="yellow"
+              colorScheme="green"
               value="1"
               size={"lg"}
               onClick={() => {
@@ -110,7 +110,7 @@ export default function FlipHead({
             <Radio
               isDisabled={statusFlip != null ? statusFlip : undefined}
               mt={2}
-              colorScheme="yellow"
+              colorScheme="green"
               value="2"
               size={"lg"}
               onClick={() => {

@@ -40,7 +40,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             bg="#0BDD7B33"
             border="2px solid"
             borderColor="#0BDD7B"
-            padding={{ lg: 4, base: 1 }}
+            padding={{ md: 4, base: 1 }}
             gap={0}
             fontWeight="800"
             borderRadius="8px"
@@ -69,6 +69,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
               </Box>
             </HStack>
             <HStack
+              pl={{ md: 2, base: 0 }}
               width="fit-content"
               display={{
                 lg: "flex",

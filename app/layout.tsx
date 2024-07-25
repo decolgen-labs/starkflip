@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       "Starknet Arcade Hub is a tribute to our NFT community and one of the largest mini-games hub for the Starknet Degens. The first product with upcominng Beta will be a CoinFlip game, allowing folks to place bets and multiply their $ETH holdings on Starknet",
     images: {
       url: "https://starkflip.starkarcade.com/assets/banner/banner.png",
-      alt: "Tetris Banner",
+      alt: "Starkflip Banner",
     },
     site: "https://starkflip.starkarcade.com",
     card: "player",

@@ -45,7 +45,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             fontWeight="800"
             borderRadius="8px"
             fontSize={{
-              lg: "normal",
+              md: "md",
               base: "xs",
             }}
           >

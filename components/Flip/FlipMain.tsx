@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 import IconStarknet from "@/public/assets/icons/starknet.svg";
 import Confetti from "../Motion/Confetti";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function FlipMain({
   handleGame,
@@ -112,10 +111,9 @@ export default function FlipMain({
             </Button>
           ))}
         </Flex>
-        <Flex gap={4} mt={{ lg: 6, base: 2 }} justifyContent={"center"}>
+        <Flex gap={4} mt={{ lg: 6, base: 4 }} justifyContent={"center"}>
           <Button
             py={2}
-            mt={4}
             px={16}
             textColor={"black"}
             border={"1px"}
@@ -127,7 +125,7 @@ export default function FlipMain({
             color={"#018576"}
             rounded={"2xl"}
             onClick={statusWon === null ? handleGame : resetGame}
-            fontSize={"1.25rem"}
+            fontSize={{ md: "1.25rem", base: "md" }}
           >
             {statusWon !== null ? "Play again" : "Flip it!"}
           </Button>

@@ -24,10 +24,10 @@ const StartGame = () => {
           <Header balance={balance} isLoading={isLoading} />
           <Box
             position="absolute"
-            top="30%"
-            left={"10%"}
+            top="35%"
+            left={"8%"}
             display={{
-              lg: "block",
+              md: "block",
               base: "none",
             }}
           >

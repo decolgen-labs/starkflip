@@ -54,7 +54,12 @@ export default function FlipMain({
     }
   }, [statusWon, coin]);
   return (
-    <Box textColor={"white"} bg={"#1d1d1b99"} my={6} rounded={"lg"}>
+    <Box
+      textColor={"white"}
+      bg={"#1d1d1b99"}
+      my={{ lg: 6, base: 3 }}
+      rounded={"lg"}
+    >
       <Box className="container">
         <Box
           ref={coinRef}
@@ -62,7 +67,7 @@ export default function FlipMain({
           className=""
           marginY={{
             lg: "2rem",
-            base: "1rem",
+            base: "0rem",
           }}
           width={{ lg: "15rem", base: "180px" }}
           height={{ lg: "15rem", base: "180px" }}
@@ -72,7 +77,7 @@ export default function FlipMain({
         </Box>
         <Flex
           bg={"black"}
-          mt={6}
+          mt={{ lg: 6, base: 2 }}
           p={1}
           gap={1}
           flexWrap={"wrap"}
@@ -107,7 +112,7 @@ export default function FlipMain({
             </Button>
           ))}
         </Flex>
-        <Flex gap={4} mt={6} justifyContent={"center"}>
+        <Flex gap={4} mt={{ lg: 6, base: 2 }} justifyContent={"center"}>
           <Button
             py={2}
             mt={4}

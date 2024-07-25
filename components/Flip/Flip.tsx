@@ -31,7 +31,7 @@ export default function Flip({
 
   return (
     <Box>
-      <Flex flexDirection={"column"}>
+      <Flex flexDirection={"column"} py={{ lg: 0, base: 4 }}>
         <FlipHead
           percentageHeads={percentageHeads}
           result={result}

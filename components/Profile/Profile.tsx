@@ -52,7 +52,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             <HStack
               width="fit-content"
               borderRight={{ lg: "2px solid", base: "none" }}
-              pr={2}
+              pr={{ md: 2, base: 0 }}
               borderRightColor="#0BDD7B"
             >
               <Text>Your Point:</Text>

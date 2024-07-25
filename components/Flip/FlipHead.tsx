@@ -22,14 +22,18 @@ export default function FlipHead({
       borderColor={borderColorStt}
       textColor="white"
       bg={"#012E3F"}
-      py={4}
-      px={5}
+      py={{ lg: 4, base: 3 }}
+      px={{ lg: 5, base: 3 }}
       rounded={"8px"}
       w={"fit-content"}
       mx={"auto"}
     >
       <RadioGroup defaultValue="1">
-        <Flex gap={8} alignItems="center" justifyContent={"space-between"}>
+        <Flex
+          gap={{ md: 8, base: 2 }}
+          alignItems="center"
+          justifyContent={"space-between"}
+        >
           <Box
             w={{ lg: "9.5rem", base: "fit-content" }}
             border="1px"

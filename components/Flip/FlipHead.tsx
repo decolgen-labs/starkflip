@@ -48,7 +48,6 @@ export default function FlipHead({
             textAlign={"center"}
           >
             <Text
-              my={0}
               whiteSpace={"pre"}
               textColor={borderColorStt}
               fontWeight="900"
@@ -86,7 +85,7 @@ export default function FlipHead({
             flexDir="column"
             alignItems="center"
             gap={1}
-            py={2}
+            py={3}
             borderColor={borderColorStt}
             rounded={"8px"}
             textAlign={"center"}
@@ -97,7 +96,6 @@ export default function FlipHead({
               whiteSpace={"pre"}
               my={0}
               fontSize={"2rem"}
-              mb={2}
             >
               {/* {percentageTails.toFixed(0)}% */}
             </Text>

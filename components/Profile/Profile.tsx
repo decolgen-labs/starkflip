@@ -33,17 +33,21 @@ export default function Profile({ balance, isLoadingBalance }: any) {
   });
   return (
     <>
-      <Menu variant="profile" matchWidth>
+      <Menu variant="profile" matchWidth placement="left-end">
         <MenuButton>
           <HStack
             color="white"
             bg="#0BDD7B33"
             border="2px solid"
             borderColor="#0BDD7B"
-            padding={{ lg: 4, base: 2 }}
+            padding={{ lg: 4, base: 1 }}
             gap={0}
             fontWeight="800"
             borderRadius="8px"
+            fontSize={{
+              lg: "normal",
+              base: "xs",
+            }}
           >
             <HStack
               width="fit-content"
@@ -51,25 +55,11 @@ export default function Profile({ balance, isLoadingBalance }: any) {
               pr={2}
               borderRightColor="#0BDD7B"
             >
-              <Text
-                fontSize={{
-                  lg: "normal",
-                  base: "sm",
-                }}
-              >
-                Your Point:
-              </Text>
+              <Text>Your Point:</Text>
               <Box>
                 {!isLoadingPoint ? (
                   dataPoint ? (
-                    <Text
-                      fontSize={{
-                        lg: "normal",
-                        base: "sm",
-                      }}
-                    >
-                      {dataPoint?.toString()}
-                    </Text>
+                    <Text>{dataPoint?.toString()}</Text>
                   ) : (
                     0
                   )
@@ -100,7 +90,11 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             </HStack>
           </HStack>
         </MenuButton>
-        <MenuList bg={{ lg: "#0BDD7B33", base: "rgba(1, 133, 118, 1)" }}>
+        <MenuList
+          mt={{ md: 0, base: 10 }}
+          ml={{ md: 0, base: 24 }}
+          bg={{ lg: "#0BDD7B33", base: "rgba(1, 133, 118, 1)" }}
+        >
           <MenuItem
             onClick={(e) => e.preventDefault()}
             display={{

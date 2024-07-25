@@ -68,7 +68,7 @@ const LeaderboardPage = () => {
           {ListHeader.map((item, index) => (
             <Text
               fontWeight="bold"
-              fontSize="xl"
+              fontSize={{ lg: "xl", base: "md" }}
               color="White"
               key={`${item}-${index}`}
             >
@@ -94,7 +94,7 @@ const LeaderboardPage = () => {
                           item.rank !== 3 && <Icon as={Trophy4} />}
                       </HStack>
                       <HStack>
-                        <Text color="White" fontSize="md">
+                        <Text color="White" fontSize={{ md: "md", base: "sm" }}>
                           {ellipseMiddle(item.player, 6, 6)}
                         </Text>
                         <CopyClipBoard

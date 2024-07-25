@@ -23,8 +23,8 @@ const Header = ({ isLoading, balance }: HeaderProps) => {
         <Icon
           cursor="pointer"
           as={LogoIcon}
-          width={12}
-          height={12}
+          width={{ lg: 12, base: 14 }}
+          height={{ lg: 12, base: 14 }}
           aria-label="Starkflip Logo"
         />
       </Link>

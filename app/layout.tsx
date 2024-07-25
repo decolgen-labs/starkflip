@@ -30,6 +30,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="twitter:card" content="player" />
+        <meta name="twitter:site" content="@starkarcade" />
+        <meta name="twitter:title" content="Starkflip | StarkArcade Hub" />
+        <meta
+          name="twitter:description"
+          content="Starknet Arcade Hub is a tribute to our NFT community and one of the largest mini-games hub for the Starknet Degens. The first product with upcominng Beta will be a CoinFlip game, allowing folks to place bets and multiply their $ETH holdings on Starknet"
+        />
+        <meta
+          name="twitter:player"
+          content="https://starkflip.starkarcade.com/"
+        />
+        <meta name="twitter:player:width" content="360" />
+        <meta name="twitter:player:height" content="560" />
+        <meta
+          name="twitter:image"
+          content="https://starkflip.starkarcade.com/banner/banner.jpg"
+        />
+      </head>
       <body className={inter.className}>
         <ProviderApp>{children}</ProviderApp>
       </body>

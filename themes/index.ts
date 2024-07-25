@@ -61,7 +61,8 @@ const Menu: ComponentStyleConfig = {
     profile: {
       list: {
         // this will style the MenuList component
-        py: "4",
+        py: { lg: "4", base: 2 },
+        minWidth: { lg: "200px", base: "150px" },
         borderRadius: "xl",
         border: "2px solid",
         borderColor: "#0BDD7B",
@@ -70,10 +71,12 @@ const Menu: ComponentStyleConfig = {
       item: {
         bg: "none",
         color: "gray.200",
-        pl: 5,
+        pl: { lg: 5, base: 2 },
         fontWeight: "bold",
         display: "flex",
-        gap: 4,
+
+        fontSize: { lg: "lg", base: "sm" },
+        gap: { lg: 4, base: 2 },
         _hover: {
           bg: convertHex("#0BDD7B", 0.5),
         },

@@ -56,7 +56,17 @@ export default function FlipMain({
   return (
     <Box textColor={"white"} bg={"#1d1d1b99"} my={6} rounded={"lg"}>
       <Box className="container">
-        <Box ref={coinRef} id="coin" className="">
+        <Box
+          ref={coinRef}
+          id="coin"
+          className=""
+          marginY={{
+            lg: "2rem",
+            base: "1rem",
+          }}
+          width={{ lg: "15rem", base: "180px" }}
+          height={{ lg: "15rem", base: "180px" }}
+        >
           <Box id="heads" className="heads"></Box>
           <Box id="tails" className="tails"></Box>
         </Box>

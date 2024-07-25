@@ -18,9 +18,6 @@ button {
 
 #coin {
   position: relative;
-  width: 15rem;
-  height: 15rem;
-  margin: 2rem 0rem;
   transform-style: preserve-3d;
 }
 

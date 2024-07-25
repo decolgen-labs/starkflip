@@ -15,9 +15,9 @@ const Header = ({ isLoading, balance }: HeaderProps) => {
       justifyContent="space-between"
       width="100%"
       zIndex="popover"
-      px={{ lg: 24, md: 12, base: 4 }}
+      px={{ lg: 24, md: 12, base: 2 }}
       position="absolute"
-      top={{ lg: "15%", md: "10%", base: "0%" }}
+      top={{ lg: "15%", md: "10%", base: "5%" }}
     >
       <Link href="/">
         <Icon

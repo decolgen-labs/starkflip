@@ -22,7 +22,15 @@ const StartGame = () => {
       {userAddress ? (
         <>
           <Header balance={balance} isLoading={isLoading} />
-          <Box position="absolute" top="30%" left={"10%"}>
+          <Box
+            position="absolute"
+            top="30%"
+            left={"10%"}
+            display={{
+              lg: "block",
+              base: "none",
+            }}
+          >
             <HomeTab />
           </Box>
           <Starked fetchBalance={fetchBalance} />

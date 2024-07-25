@@ -40,21 +40,36 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             bg="#0BDD7B33"
             border="2px solid"
             borderColor="#0BDD7B"
-            padding={4}
+            padding={{ lg: 4, base: 2 }}
+            gap={0}
             fontWeight="800"
             borderRadius="8px"
           >
             <HStack
               width="fit-content"
-              borderRight="2px solid"
+              borderRight={{ lg: "2px solid", base: "none" }}
               pr={2}
               borderRightColor="#0BDD7B"
             >
-              <Text>Your Point:</Text>
+              <Text
+                fontSize={{
+                  lg: "normal",
+                  base: "sm",
+                }}
+              >
+                Your Point:
+              </Text>
               <Box>
                 {!isLoadingPoint ? (
                   dataPoint ? (
-                    dataPoint?.toString()
+                    <Text
+                      fontSize={{
+                        lg: "normal",
+                        base: "sm",
+                      }}
+                    >
+                      {dataPoint?.toString()}
+                    </Text>
                   ) : (
                     0
                   )
@@ -63,7 +78,13 @@ export default function Profile({ balance, isLoadingBalance }: any) {
                 )}
               </Box>
             </HStack>
-            <HStack width="fit-content">
+            <HStack
+              width="fit-content"
+              display={{
+                lg: "flex",
+                base: "none",
+              }}
+            >
               <Text>STRK:</Text>
               <Box>
                 {!isLoadingBalance ? (
@@ -79,11 +100,18 @@ export default function Profile({ balance, isLoadingBalance }: any) {
             </HStack>
           </HStack>
         </MenuButton>
-        <MenuList bg="#0BDD7B33">
-          <MenuItem onClick={(e) => e.preventDefault()}>
-            <Icon as={UserIcon} h={6} w={6} />
+        <MenuList bg={{ lg: "#0BDD7B33", base: "rgba(1, 133, 118, 1)" }}>
+          <MenuItem
+            onClick={(e) => e.preventDefault()}
+            display={{
+              lg: "flex",
+              base: "block",
+            }}
+            textAlign="center"
+          >
+            <Icon as={UserIcon} h={{ lg: 6, base: 5 }} w={{ lg: 6, base: 5 }} />
             <Text fontWeight="bold">
-              {ellipseMiddle(userAddress || "", 8, 8)}
+              {ellipseMiddle(userAddress || "", 6, 6)}
             </Text>
           </MenuItem>
           {/* <Link href="/my-history">
@@ -100,7 +128,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
               await disconnectWallet();
             }}
           >
-            <Text fontSize="lg">Logout</Text>
+            <Text>Logout</Text>
             <Icon as={LogoutIcon} h={6} w={6} />
           </MenuItem>
         </MenuList>

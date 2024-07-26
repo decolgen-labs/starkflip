@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     },
     site: "https://starkflip.starkarcade.com",
     card: "player",
-    creator: "@karas_builder",
+    creator: "@starkarcade",
     players: {
       playerUrl: "https://starkflip.starkarcade.com",
       streamUrl: "https://starkflip.starkarcade.com",

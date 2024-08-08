@@ -4,6 +4,8 @@ import React from "react";
 import CoinIcon from "@/public/assets/coin/head.svg";
 import { Box, Flex, HStack, Icon, Spinner, Text } from "@chakra-ui/react";
 import { ellipseMiddle, formatBalance } from "@/utils/formatAddress";
+import { timeAgo } from "@/utils/timeFormat";
+
 const TabRentlyWin = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["recentGames"],
@@ -26,11 +28,16 @@ const TabRentlyWin = () => {
               fontWeight="bold"
             >
               <Icon as={CoinIcon} />
-              <Text>
-                {`${ellipseMiddle(item.player, 4, 4)} flipped
-               ${parseInt(formatBalance(item.stakedAmount, 18))}`}
+              <Text color="white">
+                {`${ellipseMiddle(item.player, 4, 4)} `}
               </Text>
-              <Text>and got rugged</Text>
+              <Text>{`flipped
+               ${parseInt(
+                 formatBalance(item.stakedAmount, 18)
+               )} and got lucky`}</Text>
+              <Text color="#D4D4D8" fontSize="12px" fontWeight="normal" ml={8}>
+                {item.updatedAt && timeAgo(item.updatedAt.toString())}
+              </Text>
             </HStack>
           ))}
         </>

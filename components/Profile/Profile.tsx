@@ -33,7 +33,7 @@ export default function Profile({ balance, isLoadingBalance }: any) {
   });
   return (
     <>
-      <Menu variant="profile" matchWidth placement="left-end">
+      <Menu variant="profile" matchWidth placement="bottom">
         <MenuButton>
           <HStack
             color="white"

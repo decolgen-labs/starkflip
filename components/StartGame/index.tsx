@@ -1,17 +1,15 @@
 "use client";
-import { Box, Icon } from "@chakra-ui/react";
+import { Box, Icon, Text, VStack } from "@chakra-ui/react";
 
 import ConnectWallet from "../Button/ConnectWallet";
-
-import Starked from "../Starked/Starked";
 
 import LogoIcon from "@/public/assets/logo.svg";
 
 import { useAuth } from "@/hooks/useAuth";
 import { useBalanceCustom } from "@/hooks/useBalanceCustom";
 import React from "react";
-import Header from "../Header";
-import HomeTab from "../Home/HomeTab";
+
+import Starked from "../Starked/Starked";
 const StartGame = () => {
   const { userAddress } = useAuth();
   const { fetchBalance, balance, isLoading } = useBalanceCustom({
@@ -21,19 +19,11 @@ const StartGame = () => {
     <React.Fragment>
       {userAddress ? (
         <>
-          <Header balance={balance} isLoading={isLoading} />
-          <Box
-            position="absolute"
-            top="35%"
-            left={"8%"}
-            display={{
-              md: "block",
-              base: "none",
-            }}
-          >
-            <HomeTab />
-          </Box>
-          <Starked fetchBalance={fetchBalance} />
+          <Starked
+            balance={balance}
+            isLoadingBalance={isLoading}
+            fetchBalance={fetchBalance}
+          />
         </>
       ) : (
         <>

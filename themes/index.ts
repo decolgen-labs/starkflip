@@ -92,6 +92,7 @@ const Tabs: ComponentStyleConfig = {
         bg: "rgba(1, 133, 118, 0.2)",
         borderRadius: "24px",
         border: "1px solid rgba(1, 133, 118, 1)",
+        // width: { lg: "600px", base: "100%" },
       },
       tab: {
         py: 1,

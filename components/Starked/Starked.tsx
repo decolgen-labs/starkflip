@@ -9,9 +9,16 @@ import { CONTRACT_ADDRESS, RPC_PROVIDER } from "@/utils/constants";
 import { CallData, uint256, Provider } from "starknet";
 
 import { socketAPI, startNewGame } from "@/config/socketConfig";
-import { useToast } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
+import Header from "../Header";
+import HomeTab from "../Home/HomeTab";
+import FlipMain from "../Flip/FlipMain";
 
-export default function Starked({ fetchBalance }: any) {
+export default function Starked({
+  fetchBalance,
+  isLoadingBalance,
+  balance,
+}: any) {
   const [staked, setStaked] = useState<number>(0);
   const [amount, setAmount] = useState<number>(1);
   const [statusWon, setStatusWon] = useState<boolean | null>(null);
@@ -124,17 +131,35 @@ export default function Starked({ fetchBalance }: any) {
 
   return (
     <>
-      <Flip
-        coin={coin}
-        setCoin={setCoin}
-        handleGame={handleGame}
-        setStaked={setStaked}
-        setAmount={setAmount}
-        staked={staked}
+      <Header balance={balance} isLoading={isLoadingBalance} />
+      <Box
+        position="absolute"
+        top="15%"
+        zIndex="popover"
+        left={"12%"}
+        display={{
+          md: "block",
+          base: "none",
+        }}
+      >
+        <HomeTab
+          coin={coin}
+          setCoin={setCoin}
+          handleGame={handleGame}
+          setAmount={setAmount}
+          setStaked={setStaked}
+          staked={staked}
+          resetGame={resetGame}
+          statusWon={statusWon}
+          isFlipping={isFlipping}
+          statusFlip={statusFlip}
+          refetch={fetchBalance}
+          setStatusFlip={setStatusFlip}
+        />
+      </Box>
+      <FlipMain
         statusWon={statusWon}
-        resetGame={resetGame}
-        isFlipping={isFlipping}
-        statusFlip={statusFlip}
+        coin={coin}
         setStatusFlip={setStatusFlip}
       />
     </>

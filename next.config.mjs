@@ -33,9 +33,9 @@ const nextConfig = {
         return config;
     },
     env: {
-        PUBLIC_NEXT_API: process.env.PUBLIC_NEXT_API || 'http://localhost:5001',
-        PUBLIC_NEXT_SOCKET_PORT: process.env.PUBLIC_NEXT_SOCKET_PORT || 'http://localhost:5004',
-        FLIP_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_CONTRACT,
+        PUBLIC_NEXT_API: String(process.env.PUBLIC_NEXT_API) || 'http://localhost:5001',
+        PUBLIC_NEXT_SOCKET_PORT: String(process.env.PUBLIC_NEXT_SOCKET_PORT) || 'http://localhost:5004',
+        FLIP_CONTRACT_ADDRESS: String(process.env.NEXT_PUBLIC_CONTRACT),
         NEXT_PUBLIC_PRIVATE_KEY: process.env.NEXT_PUBLIC_PRIVATE_KEY,
         NEXT_PUBLIC_POOL_ID: process.env.NEXT_PUBLIC_POOL_ID,
         NEXT_PUBLIC_RPC_URL: process.env.NEXT_PUBLIC_RPC_URL,

@@ -1,8 +1,6 @@
 import { Box, Flex, Icon, Radio, RadioGroup, Text } from "@chakra-ui/react";
 import React from "react";
 
-import IconLignt from "../../public/assets/icons/light.svg";
-
 import HeadIcon from "@/public/assets/coin/head.svg";
 import TailIcon from "@/public/assets/coin/tail.svg";
 export default function FlipHead({
@@ -52,7 +50,6 @@ export default function FlipHead({
               textColor={borderColorStt}
               fontWeight="900"
             >
-              {/* {result.heads} */}
               HEADS
             </Text>
             <Icon as={HeadIcon} h={10} w={10} />
@@ -68,15 +65,6 @@ export default function FlipHead({
             ></Radio>
           </Box>
 
-          <Box>
-            <Icon
-              color={borderColorStt}
-              as={IconLignt}
-              w={12}
-              h={12}
-              aria-label="Starknet Coinflip Decolgenlabs Border"
-            />
-          </Box>
           <Box
             w={{ lg: "9.5rem", base: "fit-content" }}
             border="1px"
@@ -92,20 +80,10 @@ export default function FlipHead({
           >
             <Text
               textColor={borderColorStt}
-              textAlign={"center"}
-              whiteSpace={"pre"}
-              my={0}
-              fontSize={"2rem"}
-            >
-              {/* {percentageTails.toFixed(0)}% */}
-            </Text>
-            <Text
-              textColor={borderColorStt}
               my={0}
               whiteSpace={"pre"}
               fontWeight="900"
             >
-              {/* {result.tails}  */}
               TAILS
             </Text>
             <Icon as={TailIcon} h={10} w={10} />

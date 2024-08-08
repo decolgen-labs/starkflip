@@ -8,7 +8,7 @@ export default function FlipMain({ statusWon, coin, setStatusFlip }: any) {
   const flipCoin = (result: "heads" | "tails") => {
     const coin = coinRef.current as HTMLElement | null;
 
-    coin?.setAttribute("class", "");
+    coin?.setAttribute("class", "chakra-stack css-k8oiwd");
     setTimeout(() => {
       coin?.setAttribute("class", `animate-${result}`);
       setTimeout(() => {
@@ -42,19 +42,11 @@ export default function FlipMain({ statusWon, coin, setStatusFlip }: any) {
             lg: "2rem",
             base: "0rem",
           }}
+          width={{ lg: "15rem", base: "180px" }}
+          height={{ lg: "15rem", base: "180px" }}
         >
-          <Box
-            id="heads"
-            className="heads"
-            width={{ lg: "15rem", base: "180px" }}
-            height={{ lg: "15rem", base: "180px" }}
-          ></Box>
-          <Box
-            id="tails"
-            className="tails"
-            width={{ lg: "15rem", base: "180px" }}
-            height={{ lg: "15rem", base: "180px" }}
-          ></Box>
+          <Box id="heads" className="heads"></Box>
+          <Box id="tails" className="tails"></Box>
         </Box>
       </Box>
       <Box display="inline-flex" fontWeight="700" color="white" gap={2}>

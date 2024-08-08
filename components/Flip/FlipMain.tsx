@@ -34,17 +34,7 @@ export default function FlipMain({ statusWon, coin, setStatusFlip }: any) {
       rounded={"lg"}
     >
       <Box className="container">
-        <Box
-          ref={coinRef}
-          id="coin"
-          className=""
-          marginY={{
-            lg: "2rem",
-            base: "0rem",
-          }}
-          width={{ lg: "15rem", base: "180px" }}
-          height={{ lg: "15rem", base: "180px" }}
-        >
+        <Box ref={coinRef} id="coin" className="">
           <Box id="heads" className="heads"></Box>
           <Box id="tails" className="tails"></Box>
         </Box>

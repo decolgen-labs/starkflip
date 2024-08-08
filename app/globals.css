@@ -19,8 +19,8 @@ button {
 #coin {
   position: relative;
   transform-style: preserve-3d;
-  height: "15rem";
-  width: "15rem";
+  height: 15rem;
+  width: 15rem;
 }
 @media (max-width: 768px) {
   #coin {

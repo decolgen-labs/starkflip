@@ -8,7 +8,7 @@ export default function FlipMain({ statusWon, coin, setStatusFlip }: any) {
   const flipCoin = (result: "heads" | "tails") => {
     const coin = coinRef.current as HTMLElement | null;
 
-    coin?.setAttribute("class", "chakra-stack css-k8oiwd");
+    coin?.setAttribute("class", "");
     setTimeout(() => {
       coin?.setAttribute("class", `animate-${result}`);
       setTimeout(() => {

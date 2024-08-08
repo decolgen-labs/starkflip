@@ -7,10 +7,8 @@ const PickEntry = ({
   setAmount,
   staked,
   statusWon,
-  coin,
   resetGame,
   statusFlip,
-  setStatusFlip,
   isFlipping,
 }: any) => {
   const listItem = [
@@ -25,29 +23,6 @@ const PickEntry = ({
     },
   ];
 
-  const coinRef = useRef(null);
-
-  const flipCoin = (result: "heads" | "tails") => {
-    const coin = coinRef.current as HTMLElement | null;
-
-    coin?.setAttribute("class", "");
-    setTimeout(() => {
-      coin?.setAttribute("class", `animate-${result}`);
-      setTimeout(() => {
-        setStatusFlip(true);
-      }, 3000);
-    }, 1000);
-  };
-
-  useEffect(() => {
-    if (statusWon !== null) {
-      if (statusWon) {
-        flipCoin(coin === 0 ? "heads" : "tails");
-      } else {
-        flipCoin(coin === 1 ? "heads" : "tails");
-      }
-    }
-  }, [statusWon, coin]);
   return (
     <Box textColor={"white"} my={{ lg: 6, base: 3 }} rounded={"lg"}>
       <Box className="container">

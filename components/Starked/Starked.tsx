@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 
 import config from "../../config/config";
 
-import Flip from "../Flip/Flip";
-
 import { CONTRACT_ADDRESS, RPC_PROVIDER } from "@/utils/constants";
 import { CallData, uint256, Provider } from "starknet";
 

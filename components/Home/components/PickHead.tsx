@@ -27,7 +27,11 @@ const PickHead = ({ setCoin, statusFlip, statusWon }: any) => {
           <Text whiteSpace={"pre"} fontSize="lg" fontWeight={700}>
             HEADS
           </Text>
-          <Icon as={HeadIcon} h={"120px"} w={"120px"} />
+          <Icon
+            as={HeadIcon}
+            h={{ lg: "120px", base: "40px" }}
+            w={{ lg: "120px", base: "40px" }}
+          />
           <Radio
             isDisabled={statusFlip != null ? statusFlip : undefined}
             mt={2}
@@ -53,7 +57,11 @@ const PickHead = ({ setCoin, statusFlip, statusWon }: any) => {
           <Text my={0} whiteSpace={"pre"} fontSize="lg" fontWeight={700}>
             TAILS
           </Text>
-          <Icon as={TailIcon} h={"120px"} w={"120px"} />
+          <Icon
+            as={TailIcon}
+            h={{ lg: "120px", base: "40px" }}
+            w={{ lg: "120px", base: "40px" }}
+          />
           <Radio
             isDisabled={statusFlip != null ? statusFlip : undefined}
             mt={2}

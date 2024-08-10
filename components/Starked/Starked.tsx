@@ -132,13 +132,10 @@ export default function Starked({
       <Header balance={balance} isLoading={isLoadingBalance} />
       <Box
         position="absolute"
-        top="15%"
+        top={{ lg: "15%", md: "20%", base: "10%" }}
         zIndex="popover"
-        left={"12%"}
-        display={{
-          md: "block",
-          base: "none",
-        }}
+        left={{ lg: "12%", md: "50%%" }}
+        right={{ lg: "inherit", md: "50%%" }}
       >
         <HomeTab
           coin={coin}
@@ -155,11 +152,13 @@ export default function Starked({
           setStatusFlip={setStatusFlip}
         />
       </Box>
-      <FlipMain
-        statusWon={statusWon}
-        coin={coin}
-        setStatusFlip={setStatusFlip}
-      />
+      <Box display={{ lg: "block", base: "none" }}>
+        <FlipMain
+          statusWon={statusWon}
+          coin={coin}
+          setStatusFlip={setStatusFlip}
+        />
+      </Box>
     </>
   );
 }

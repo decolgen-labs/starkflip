@@ -2,6 +2,8 @@ import React from "react";
 
 import PickHead from "./PickHead";
 import PickEntry from "./PickEntry";
+import FlipMain from "@/components/Flip/FlipMain";
+import { Box } from "@chakra-ui/react";
 const TabPickSide = ({
   coin,
   setCoin,
@@ -25,6 +27,13 @@ const TabPickSide = ({
         statusFlip={statusFlip}
         statusWon={statusWon}
       />
+      <Box display={{ lg: "none", base: "block" }}>
+        <FlipMain
+          statusWon={statusWon}
+          coin={coin}
+          setStatusFlip={setStatusFlip}
+        />
+      </Box>
       <PickEntry
         status={status}
         handleGame={handleGame}

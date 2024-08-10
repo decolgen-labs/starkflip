@@ -14,7 +14,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
         aria-label="Starknet Coinflip Decolgenlabs"
         left={4}
         right={0}
-        display={{ md: "block", base: "none" }}
+        display={{ lg: "block", base: "none" }}
       />
 
       <Icon
@@ -25,7 +25,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
         position="absolute"
         top={0}
         right={4}
-        display={{ md: "block", base: "none" }}
+        display={{ lg: "block", base: "none" }}
       />
 
       <Center

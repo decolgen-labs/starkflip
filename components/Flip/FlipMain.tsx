@@ -27,12 +27,7 @@ export default function FlipMain({ statusWon, coin, setStatusFlip }: any) {
     }
   }, [statusWon, coin]);
   return (
-    <VStack
-      textColor={"white"}
-      bg={"#1d1d1b99"}
-      my={{ lg: 6, base: 3 }}
-      rounded={"lg"}
-    >
+    <VStack textColor={"white"} my={{ lg: 6, base: 3 }} rounded={"lg"}>
       <Box className="container">
         <Box ref={coinRef} id="coin" className="">
           <Box id="heads" className="heads"></Box>

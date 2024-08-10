@@ -24,8 +24,8 @@ button {
 }
 @media (max-width: 768px) {
   #coin {
-    height: 180px;
-    width: 180px;
+    height: 100px;
+    width: 100px;
   }
 }
 #coin div {

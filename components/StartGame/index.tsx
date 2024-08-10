@@ -1,5 +1,5 @@
 "use client";
-import { Box, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, Icon } from "@chakra-ui/react";
 
 import ConnectWallet from "../Button/ConnectWallet";
 

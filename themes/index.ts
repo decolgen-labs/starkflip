@@ -96,7 +96,8 @@ const Tabs: ComponentStyleConfig = {
       },
       tab: {
         py: 1,
-        px: 4,
+        px: { md: 4, base: 2 },
+        fontSize: { lg: "lg", base: "sm" },
         borderRadius: "24px",
         _selected: {
           background: "rgba(255, 255, 255, 0.2)",

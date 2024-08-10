@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     creator: "@starkarcade",
     players: {
       playerUrl: "https://starkflip.starkarcade.com",
-      streamUrl: "https://starkflip.starkarcade.com",
+      streamUrl: "https://starkflip.starkarcade.com/assets/video/technical.mp4",
       width: 600,
       height: 600,
     },

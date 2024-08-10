@@ -6,7 +6,7 @@ import ProviderApp from "@/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Starkflip Game | StarkArcade Hub",
+  title: "Starkflip | StarkArcade Hub",
   metadataBase: new URL("https://starkflip.starkarcade.com/"),
   description:
     "Starknet Arcade Hub is a tribute to our NFT community and one of the largest mini-games hub for the Starknet Degens. The first product with upcominng Beta will be a CoinFlip game, allowing folks to place bets and multiply their $ETH holdings on Starknet",
@@ -34,18 +34,18 @@ export const metadata: Metadata = {
     url: "https://starkflip.starkarcade.com",
     type: "website",
     emails: "karasbuilder@gmail.com",
-    siteName: "Starkflip Game",
+    siteName: "Starkflip",
   },
   twitter: {
-    title: "Starkflip Game | StarkArcade Hub",
+    title: "Starkflip | StarkArcade Hub",
     description:
       "Starknet Arcade Hub is a tribute to our NFT community and one of the largest mini-games hub for the Starknet Degens. The first product with upcominng Beta will be a CoinFlip game, allowing folks to place bets and multiply their $ETH holdings on Starknet",
     images: {
       url: "https://starkflip.starkarcade.com/assets/banner/banner.png",
       alt: "Starkflip Banner",
     },
-    site: "@starkarcade",
     card: "player",
+    site: "@starkarcade",
     creator: "@starkarcade",
     players: {
       playerUrl: "https://starkflip.starkarcade.com",
@@ -65,22 +65,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="twitter:card" content="player" />
-        <meta name="twitter:site" content="@starkarcade" />
-        <meta name="twitter:title" content="Starkflip | StarkArcade Hub" />
-        <meta
-          name="twitter:description"
-          content="Starknet Arcade Hub is a tribute to our NFT community and one of the largest mini-games hub for the Starknet Degens. The first product with upcominng Beta will be a CoinFlip game, allowing folks to place bets and multiply their $ETH holdings on Starknet"
-        />
         <meta
           name="twitter:player"
-          content="https://starkflip.starkarcade.com/"
-        />
-        <meta name="twitter:player:width" content="360" />
-        <meta name="twitter:player:height" content="560" />
-        <meta
-          name="twitter:image"
-          content="https://starkflip.starkarcade.com/banner/banner.jpg"
+          content="https://starkflip.starkarcade.com"
         />
       </head>
       <body className={inter.className}>

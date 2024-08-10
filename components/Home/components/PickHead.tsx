@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, RadioGroup, Text, Icon, Radio } from "@chakra-ui/react";
 
 import HeadIcon from "@/public/assets/coin/head.svg";
-import TailIcon from "@/public/assets/coin/tail_1.svg";
+import TailIcon from "@/public/assets/coin/tail.svg";
 const PickHead = ({ setCoin, statusFlip, statusWon }: any) => {
   const borderColorStt =
     statusWon == null ? "#00FFB3" : statusWon ? "#00FFB3" : "secondary.200";

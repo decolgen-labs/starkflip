@@ -44,7 +44,7 @@ export const metadata: Metadata = {
       url: "https://starkflip.starkarcade.com/assets/banner/banner.png",
       alt: "Starkflip Banner",
     },
-    site: "https://starkflip.starkarcade.com",
+    site: "@starkarcade",
     card: "player",
     creator: "@starkarcade",
     players: {

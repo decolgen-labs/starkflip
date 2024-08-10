@@ -27,15 +27,26 @@ const TabRentlyWin = () => {
               color="rgba(1, 133, 118, 1)"
               fontWeight="bold"
             >
-              <Icon as={CoinIcon} />
-              <Text color="white">
-                {`${ellipseMiddle(item.player, 4, 4)} `}
-              </Text>
-              <Text>{`flipped
+              <Icon as={CoinIcon} h={6} w={6} />
+              <HStack
+                flexWrap={{ md: "nowrap", base: "wrap" }}
+                gap={{ md: 2, base: 0 }}
+              >
+                <Text color="white">
+                  {`${ellipseMiddle(item.player, 4, 4)} `}
+                </Text>
+                <Text>{`flipped
                ${parseInt(
                  formatBalance(item.stakedAmount, 18)
                )} and got lucky`}</Text>
-              <Text color="#D4D4D8" fontSize="12px" fontWeight="normal" ml={8}>
+              </HStack>
+
+              <Text
+                color="#D4D4D8"
+                fontSize="12px"
+                fontWeight="normal"
+                ml={{ md: 8, base: 0 }}
+              >
                 {item.updatedAt && timeAgo(item.updatedAt.toString())}
               </Text>
             </HStack>

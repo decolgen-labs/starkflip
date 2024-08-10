@@ -132,10 +132,12 @@ export default function Starked({
       <Header balance={balance} isLoading={isLoadingBalance} />
       <Box
         position="absolute"
-        top={{ lg: "15%", md: "20%", base: "10%" }}
+        top={{ lg: "25%", md: "20%", base: "10%" }}
         zIndex="popover"
-        left={{ lg: "12%", md: "50%%" }}
+        left={{ lg: "8%", md: "50%%" }}
         right={{ lg: "inherit", md: "50%%" }}
+        width={{ md: "500px", base: "100%" }}
+        px={{ lg: 0, base: 4 }}
       >
         <HomeTab
           coin={coin}

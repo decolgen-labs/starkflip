@@ -133,10 +133,10 @@ export default function Starked({
       <Box
         position="absolute"
         top={{ lg: "25%", md: "20%", base: "10%" }}
-        zIndex="popover"
+        zIndex="100"
         left={{ lg: "8%", md: "50%%" }}
         right={{ lg: "inherit", md: "50%%" }}
-        width={{ md: "500px", base: "100%" }}
+        width={{ md: "500px", base: "80%" }}
         px={{ lg: 0, base: 4 }}
       >
         <HomeTab

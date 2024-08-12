@@ -9,6 +9,7 @@ import {
   MenuList,
   Skeleton,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { useContractRead } from "@starknet-react/core";
 import React from "react";
@@ -31,9 +32,10 @@ export default function Profile({ balance, isLoadingBalance }: any) {
     args: [userAddress ? userAddress : ""],
     address: CONTRACT_ADDRESS.USER_POINT,
   });
+  const matchValue = useBreakpointValue({ base: false, md: true });
   return (
     <>
-      <Menu variant="profile" matchWidth placement="bottom">
+      <Menu variant="profile" matchWidth={matchValue} placement="bottom-start">
         <MenuButton>
           <HStack
             color="white"
@@ -92,8 +94,8 @@ export default function Profile({ balance, isLoadingBalance }: any) {
           </HStack>
         </MenuButton>
         <MenuList
-          mt={{ md: 0, base: 10 }}
-          ml={{ md: 0, base: 24 }}
+          mt={{ md: 0, base: 2 }}
+          // ml={{ md: 0, base: 24 }}
           bg={{ lg: "#0BDD7B33", base: "rgba(1, 133, 118, 1)" }}
         >
           <MenuItem

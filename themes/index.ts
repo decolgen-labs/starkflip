@@ -62,11 +62,12 @@ const Menu: ComponentStyleConfig = {
       list: {
         // this will style the MenuList component
         py: { lg: "4", base: 2 },
-        minWidth: { lg: "200px", base: "150px" },
+        minWidth: "200px",
         borderRadius: "xl",
         border: "2px solid",
         borderColor: "#0BDD7B",
         bg: "#0BDD7B33",
+        zIndex: "popover",
       },
       item: {
         bg: "none",
